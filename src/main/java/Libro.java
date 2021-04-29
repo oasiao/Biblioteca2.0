@@ -248,6 +248,7 @@ public class Libro {
             }
             else
             {
+                if(j==Biblioteca.getLibros().size()-1 && !isbn.equals(biblioteca.getLibros().get(j).getIsbn()))
                 System.out.println("El libro no está registrado en la biblioteca.");
             }
         }
@@ -274,7 +275,7 @@ public class Libro {
                 answer = utilities.makeQuestion("El libro que estás buscando es " + biblioteca.getLibros().get(i).getTitulo() + "? Sí (1) o No (0)");
 
                 if (answer.equals("1")) {
-                    System.out.println("El libro que estas buscando es: \n"+biblioteca.getLibros().get(i)+"y se encuentra en al posición: "+i);
+                    System.out.println("TU BUSQUEDA: \n"+biblioteca.getLibros().get(i)+"\ny se encuentra en la posición: "+i+" de la biblioteca");
                     break;
                 }
                 else

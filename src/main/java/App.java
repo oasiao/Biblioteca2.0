@@ -142,7 +142,7 @@ public class App {
 
                             //MOSTRAR LISTA DE RESERVAS
                         case 3:
-                            reserva.mostrarReservas();
+                            System.out.println(reserva.mostrarReservas());
                             break;
 
                             //SALIR
@@ -258,7 +258,7 @@ public class App {
                 App.menuUsuario();
                 break;
 
-            //TODO CAMBIAR CONTRASEÑA
+
             case 2:
                 usuario.cambiarContraseñaUsuario();
                 App.menuUsuario();

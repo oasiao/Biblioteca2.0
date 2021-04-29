@@ -83,29 +83,35 @@ public class Reserva extends Libro{
                 for (int j = 0; j < Biblioteca.getLibros().size(); j++)
                 {
                     //COMPROBAMOS QUE EL LIBRO SE ENCUENTRA EN LA BIBLIOTECA Y ADEMÁS, QUE HAYA COPIAS DISPONIBLES
-                    if(Biblioteca.getLibros().get(j).getIsbn().equals(isbn) && Biblioteca.getLibros().get(j).getNumCopiasDisponibles() > 0)
+                    if(Biblioteca.getLibros().get(j).getIsbn().equals(isbn))
                     {
-                        //LIBRO RESERVADO
-                        //Restamos libro disponible
-                        Biblioteca.getLibros().get(j).setNumCopiasDisponibles(Biblioteca.getLibros().get(j).getNumCopiasDisponibles() - 1);
+                        if(Biblioteca.getLibros().get(j).getNumCopiasDisponibles() > 0)
+                        {
+                            //LIBRO RESERVADO
+                            //Restamos libro disponible
+                            Biblioteca.getLibros().get(j).setNumCopiasDisponibles(Biblioteca.getLibros().get(j).getNumCopiasDisponibles() - 1);
 
-                        //añadimos el libro reservado en la lista de libros reservados para poder hacer el control de eliminarLibro
-                        Biblioteca.getLibrosReservados().add(Biblioteca.getLibros().get(j));
+                            //añadimos el libro reservado en la lista de libros reservados para poder hacer el control de eliminarLibro
+                            Biblioteca.getLibrosReservados().add(Biblioteca.getLibros().get(j));
 
-                        //creamos una reserva
-                        usuario.getListaReservas().add(new Reserva(Biblioteca.getLibros().get(j).getIsbn(),
-                                Biblioteca.getLibros().get(j).getTitulo(), Biblioteca.getLibros().get(j).getAutor(),
-                                Biblioteca.getLibros().get(j).getEditorial(),
-                                Biblioteca.getLibros().get(j).getNumCopias(),
-                                Biblioteca.getLibros().get(j).getNumCopiasDisponibles(),
-                                usuario.getListaUsuarios().get(i),
-                                getFechaYHora()));
+                            //creamos una reserva
+                            usuario.getListaReservas().add(new Reserva(Biblioteca.getLibros().get(j).getIsbn(),
+                                    Biblioteca.getLibros().get(j).getTitulo(), Biblioteca.getLibros().get(j).getAutor(),
+                                    Biblioteca.getLibros().get(j).getEditorial(),
+                                    Biblioteca.getLibros().get(j).getNumCopias(),
+                                    Biblioteca.getLibros().get(j).getNumCopiasDisponibles(),
+                                    usuario.getListaUsuarios().get(i),
+                                    getFechaYHora()));
 
-                        System.out.println("Libro reservado!");
-                    }
-                    else{
-                        //NO HAY LIBROS DISPONIBLES
-                        System.out.println("No tenemos ningún libro disponible.");
+                            System.out.println("Libro reservado!");
+                            break;
+                        }
+                        else
+                        {
+                            //NO HAY LIBROS DISPONIBLES
+                            System.out.println("No tenemos ningún libro disponible.");
+                            break;
+                        }
                     }
 
                     //EL LIBRO NO ESTÁ REGISTRADO EN NUESTRA BIBLIOTECA
@@ -157,14 +163,19 @@ public class Reserva extends Libro{
                     {
                         //LIBRO DEVUELTO
                         Biblioteca.getLibros().get(j).setNumCopiasDisponibles(Biblioteca.getLibros().get(j).getNumCopiasDisponibles() + 1);
+                        break;
+                    }
+                    else
+                    {
+                        //EL LIBRO NO ESTÁ REGISTRADO EN NUESTRA BIBLIOTECA
+                        //Si hemos llegado al último libro y el isbn != todos, entonces mostraremos el siguiente mensaje
+                        if(j==Biblioteca.getLibros().size()-1 && !Biblioteca.getLibros().get(j).getIsbn().equals(isbn))
+                        {
+                            System.out.println("El libro no se encuentra registrado en nuestra biblioteca.");
+                        }
+                        break;
                     }
 
-                    //EL LIBRO NO ESTÁ REGISTRADO EN NUESTRA BIBLIOTECA
-                    //Si hemos llegado al último libro y el isbn != todos, entonces mostraremos el siguiente mensaje
-                    if(j==Biblioteca.getLibros().size()-1 && !Biblioteca.getLibros().get(j).getIsbn().equals(isbn))
-                    {
-                        System.out.println("El libro no se encuentra registrado en nuestra biblioteca.");
-                    }
                 }
             }
             //CORREO ELECTRÓNICO Y TELÉFONO NO REGISTRADOS

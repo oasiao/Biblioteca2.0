@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,9 +212,12 @@ public class Bibliotecario extends Persona {
         for (int i = 0; i < Biblioteca.getPersonas().size(); i++) {
             if (Biblioteca.getPersonas().get(i).toString().contains(opcion)) {
                 Biblioteca.getPersonas().remove(i);
+                System.out.println("-------------------ELIMINADO CON ÉXITO------------------");
                 break;
             } else {
-                System.out.println("El elemento no existe");
+                if(i==Biblioteca.getPersonas().size()-1 &&!Biblioteca.getPersonas().get(i).toString().contains(opcion)) {
+                    System.out.println("El elemento no existe");
+                }
             }
         }
     }
