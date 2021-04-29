@@ -137,7 +137,7 @@ public class App {
 
                             //MOSTRAR LISTA DE LIBROS DISPONIBLES
                         case 2:
-                            biblioteca.mostrarLibrosDisponibles();
+                            System.out.println(biblioteca.mostrarLibrosDisponibles());;
                             break;
 
                             //MOSTRAR LISTA DE RESERVAS
