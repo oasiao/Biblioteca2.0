@@ -212,6 +212,13 @@ public class Bibliotecario extends Persona {
         for (int i = 0; i < Biblioteca.getPersonas().size(); i++) {
             if (Biblioteca.getPersonas().get(i).toString().contains(opcion)) {
                 Biblioteca.getPersonas().remove(i);
+
+                //LO BORRAMOS EN LA LISTA CREADA SOLO PARA BIBLIOTECARIOS
+                for (int j = 0; j < getListaBibliotecarios().size(); j++) {
+                    if(getListaBibliotecarios().get(j).getNIF().equals(opcion)){
+                        getListaBibliotecarios().remove(j);
+                    }
+                }
                 System.out.println("-------------------ELIMINADO CON ÉXITO------------------");
                 break;
             } else {

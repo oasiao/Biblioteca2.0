@@ -306,6 +306,7 @@ public class Libro {
             //COMPROBAMOS QUE HAYA ALGÚN LIBRO COINCIDENTE CON EL TÍTULO INTRODUCIDO
             if (title.equals(biblioteca.getLibros().get(i).getTitulo())) {
                 System.out.println(biblioteca.getLibros().get(i));
+                break;
             }
             else
             {

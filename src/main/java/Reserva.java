@@ -24,7 +24,7 @@ public class Reserva extends Libro{
 
     @Override
     public String toString() {
-        return "------------------------------------------------\nReserva:" +
+        return "------------------------------------------------\nReserva:\n" +
                 "Reservado por: " + usuario + "\n" +
                 "Fecha y hora:" + fechaYHora + "\n------------------------------------------------\n";
     }
@@ -36,7 +36,7 @@ public class Reserva extends Libro{
         Usuario usuario = new Usuario();
         String reservas="";
         for (int i = 0; i < usuario.getListaReservas().size(); i++) {
-            reservas+=usuario.getListaReservas().toString();
+            reservas+=usuario.getListaReservas().get(i).toString();
         }
         return reservas;
     }
@@ -103,7 +103,7 @@ public class Reserva extends Libro{
                                     usuario.getListaUsuarios().get(i),
                                     getFechaYHora()));
 
-                            System.out.println("Libro reservado!");
+                            System.out.println("\n--------------¡LIBRO RESERVADO!--------------\n");
                             break;
                         }
                         else
