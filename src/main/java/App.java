@@ -16,6 +16,9 @@ public class App {
         Biblioteca.getPersonas().add(new Bibliotecario("root", "root", "root", 0, "BIBLIOTECARIO",
                 "ADMINISTRADOR", "00000000A", "rootroot"));
 
+        Bibliotecario.getListaBibliotecarios().add(new Bibliotecario("root", "root", "root", 0, "BIBLIOTECARIO",
+                "ADMINISTRADOR", "00000000A", "rootroot"));
+
         //ENTRAMOS AL PRIMER MENÚ
         bibliotecario.logInOrRegister();
 
@@ -101,7 +104,7 @@ public class App {
                             reserva.devolverLibro();
                             break;
                         case 7:
-                            System.exit(0);
+                            App.menuBibliotecario();
                             break;
                     }
                     App.menuBibliotecario();
@@ -144,7 +147,7 @@ public class App {
 
                             //SALIR
                         case 4:
-                            System.exit(0);
+                            App.menuBibliotecario();
                             break;
                     }
                     App.menuBibliotecario();
@@ -186,10 +189,10 @@ public class App {
                             while (confirm == 1);
                             break;
                         case 3:
-                            System.out.println(Biblioteca.getPersonas().toString());
+                            System.out.println(Bibliotecario.getListaBibliotecarios().toString());
                             break;
                         case 4:
-                            System.exit(0);
+                            App.menuBibliotecario();
                             break;
                     }
                     App.menuBibliotecario();
@@ -197,6 +200,8 @@ public class App {
                     System.out.println("El caracter introducido no es válido");
                 }
                 break;
+
+            //CAMBIAR CONTRASEÑA
             case 4:
                 bibliotecario.cambiarContraseñaBibliotecario();
                 App.menuBibliotecario();
@@ -230,7 +235,7 @@ public class App {
 
         //OPCIONES A MENU USUARIO
         System.out.println("----------------MENÚ USUARIO----------------");
-        System.out.println("1. Buscar libro");
+        System.out.println("1. Buscar libro por titulo");
         System.out.println("2. Cambiar contraseña");
         System.out.println("3. Cerrar Sesión");
         System.out.println("4. Salir");

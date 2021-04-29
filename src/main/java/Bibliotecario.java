@@ -9,7 +9,7 @@ public class Bibliotecario extends Persona {
     private String contraseña;
 
     //Creamos una nueva lista, solo para bibliotecarios
-    private List<Bibliotecario> listaBibliotecarios = new ArrayList<>();
+    private static List<Bibliotecario> listaBibliotecarios = new ArrayList<>();
 
     //Creamos un boolean login
     private static boolean login;
@@ -63,7 +63,7 @@ public class Bibliotecario extends Persona {
         this.contraseña = contraseña;
     }
 
-    public List<Bibliotecario> getListaBibliotecarios() {
+    public static List<Bibliotecario> getListaBibliotecarios() {
         return listaBibliotecarios;
     }
 
@@ -222,6 +222,9 @@ public class Bibliotecario extends Persona {
         setLogin(false);
     }
 
+
+    //TODO si cambia en la lista de Bibliotecarios, tambien cambia en la lista de personas
+
     public void cambiarContraseñaBibliotecario(){
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
@@ -229,15 +232,16 @@ public class Bibliotecario extends Persona {
         Bibliotecario bibliotecario = new Bibliotecario();
 
         //SOLICITAMOS LOS DATOS
-        String NIF = utilities.makeQuestion("Introduce tu número de teléfono");
+        String NIF = utilities.makeQuestion("Introduce tu NIF");
 
+        //Recorremos la lista
         for (int i = 0; i < getListaBibliotecarios().size(); i++) {
             if (getListaBibliotecarios().get(i).getNIF().equals(NIF)) {
-                String contraseñaAntigua=("Introduce tu contraseña antigua");
-                if (getListaBibliotecarios().get(i).getNIF().equals(NIF) && getListaBibliotecarios().get(i).getContraseña().equals(contraseñaAntigua)) {
+                String contraseñaAntigua=utilities.makeQuestion("Introduce tu contraseña antigua");
+                if (getListaBibliotecarios().get(i).getContraseña().equals(contraseñaAntigua)) {
                     String contraseñaNueva = utilities.makeQuestion("Introduce tu nueva contraseña");
                     getListaBibliotecarios().get(i).setContraseña(contraseñaNueva);
-                    System.out.println("----------------CONTRASEÑA CAMBIADA----------------");
+                    System.out.println("----------------CONTRASEÑA CAMBIADA----------------\n");
                 }
             } else {
                 System.out.println("ERROR. Usuario incorrecto.\n");

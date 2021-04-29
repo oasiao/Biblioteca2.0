@@ -77,8 +77,8 @@ public abstract class Persona {
         String nombre = utilities.makeQuestion("Ingresa el nombre");
 
         //APELLIDOS
-        String apellido1 = utilities.makeQuestion("Ingresa apellido");
-        String apellido2 = utilities.makeQuestion("Ingresa apellido");
+        String apellido1 = utilities.makeQuestion("Ingresa tu primer apellido");
+        String apellido2 = utilities.makeQuestion("Ingresa tu segundo apellido");
 
         //EDAD
         int edad = parseInt(utilities.makeQuestion("Ingresa edad"));

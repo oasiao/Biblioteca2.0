@@ -11,7 +11,7 @@ public class Usuario extends Persona{
     private List<Reserva> listaReservas=new ArrayList<>();
 
     //Necesitamos una lista de usuarios
-    private List<Usuario> listaUsuarios=new ArrayList<>();
+    private static List<Usuario> listaUsuarios=new ArrayList<>();
 
     //constructor vacío
     public Usuario(){}
@@ -82,7 +82,7 @@ public class Usuario extends Persona{
         this.listaReservas = listaReservas;
     }
 
-    public List<Usuario> getListaUsuarios() {
+    public static List<Usuario> getListaUsuarios() {
         return listaUsuarios;
     }
 
@@ -175,8 +175,8 @@ public class Usuario extends Persona{
 
         for (int i = 0; i < getListaUsuarios().size(); i++) {
             if (getListaUsuarios().get(i).getTelefono()==numTel) {
-                String correoElectronicoAntiguo=("Introduce tu correo electrónico antiguo");
-                if (getListaUsuarios().get(i).getTelefono()==numTel && getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronicoAntiguo)) {
+                String correoElectronicoAntiguo=utilities.makeQuestion("Introduce tu correo electrónico antiguo");
+                if (getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronicoAntiguo)) {
                     String correoElectronicoNuevo = utilities.makeQuestion("Introduce tu nuevo correo electrónico");
                     getListaUsuarios().get(i).setCorreoElectronico(correoElectronicoNuevo);
                     System.out.println("----------------CORREO ELECTRÓNICO CAMBIADO----------------");
