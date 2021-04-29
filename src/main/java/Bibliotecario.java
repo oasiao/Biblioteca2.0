@@ -205,7 +205,7 @@ public class Bibliotecario extends Persona {
         super.solicitarDatosPersona();
     }
 
-    public void eliminarPersonal() {
+   /* public void eliminarPersonal() {
         Utilities utilities = new Utilities();
         String opcion = utilities.makeQuestion("Introduce el NIF");
 
@@ -227,7 +227,28 @@ public class Bibliotecario extends Persona {
                 }
             }
         }
-    }
+    }*/
+
+    public void eliminarPersonal(){
+        Utilities utilities= new Utilities();
+        String opcion=utilities.makeQuestion("Introduce el NIF").toUpperCase();
+
+        for (int i = 0; i < Biblioteca.getPersonas().size(); i++) {
+                for (int j = 0; j < getListaBibliotecarios().size(); j++) {
+                    if(Biblioteca.getPersonas().get(i).toString().contains(opcion) &&
+                            Biblioteca.getPersonas().get(i).toString().equals(getListaBibliotecarios().get(j).toString())){
+
+                        Biblioteca.getPersonas().remove(i);
+                        getListaBibliotecarios().remove(j);
+
+                        System.out.println("-------------------ELIMINADO CON ÉXITO------------------");
+                        break;
+                    } else {
+                        System.out.println("El elemento no existe");
+                    }
+                }
+            }
+        }
 
     public void logOut() {
         setLogin(false);
@@ -239,8 +260,6 @@ public class Bibliotecario extends Persona {
     public void cambiarContraseñaBibliotecario(){
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
-        Usuario usuario = new Usuario();
-        Bibliotecario bibliotecario = new Bibliotecario();
 
         //SOLICITAMOS LOS DATOS
         String NIF = utilities.makeQuestion("Introduce tu NIF");
