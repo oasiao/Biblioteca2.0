@@ -166,7 +166,7 @@ public class Libro {
         Biblioteca biblioteca = new Biblioteca();
         Utilities utilities = new Utilities();
 
-        //PEDIMOS EISBN
+        /*//PEDIMOS ISBN
         String isbn = utilities.makeQuestion("Introduce el isbn del libro que quieres eliminar: ");
 
         //RECORREMOS LA LISTA DE LIBROS
@@ -177,16 +177,47 @@ public class Libro {
 
                 //si encontramos uno que coincida, entonces, comprobamos que no se encuentre en la lista de Reservas
                 for (int j = 0; j < Biblioteca.getLibrosReservados().size(); j++) {
-                    if (!isbn.equals(biblioteca.getLibros().get(j).getIsbn())) {
+                    if (isbn.equals(biblioteca.getLibros().get(j).getIsbn())) {
+                        System.out.println("No podemos eliminar el libro porque un usuario lo tiene reservado.");
+                    }
+                    else
+                    {
+                        biblioteca.getLibros().remove(i);
+                    }
+                }
+            }
+        }*/
+
+
+        //vamos a hacerlo de otra manera, porque si no hay reservas, en el segundo for NO RECORRE porque SIZE == 0
+
+        //PEDIMOS ISBN
+        String isbn = utilities.makeQuestion("Introduce el isbn del libro que quieres eliminar: ");
+
+        //RECORREMOS LA LISTA DE LIBROS
+        for (int i = 0; i < biblioteca.getLibrosReservados().size(); i++) {
+
+            //Si el libro coincide con alguna reserva, entonces no lo eliminamos
+            if (!isbn.equals(biblioteca.getLibrosReservados().get(i).getIsbn())) {
+                for (int j = 0; j < Biblioteca.getLibros().size(); j++) {
+                    if (isbn.equals(biblioteca.getLibros().get(j).getIsbn())) {
                         biblioteca.getLibros().remove(i);
                     }
                     else
                     {
-                        System.out.println("No podemos eliminar el libro porque un usuario lo tiene reservado.");
+                        System.out.println("El libro no está registrado en la biblioteca.");
                     }
                 }
             }
+
+            //si encontramos uno que coincida, entonces, comprobamos que no se encuentre en la lista de Reservas
+            else
+            {
+                System.out.println("No podemos eliminar el libro porque un usuario lo tiene reservado.");
+            }
+
         }
+
     }
 
     /*- Buscar libro por ISBN: Pedirá al usuario un ISBN, lo buscará en la lista.

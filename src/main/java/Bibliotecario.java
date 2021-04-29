@@ -117,7 +117,6 @@ public class Bibliotecario extends Persona {
             if (getLogin()) {
                 App.menuBibliotecario();
             } else {
-                System.out.println("Tiene que iniciar sesión.");
                 logInOrRegister();
             }
 

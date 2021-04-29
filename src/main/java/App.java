@@ -118,20 +118,32 @@ public class App {
                 System.out.println("Escoge una opción: ");
                 System.out.println("1. Mostrar lista de libros");
                 System.out.println("2. Mostrar libros disponibles");
-                System.out.println("3. Salir");
+                System.out.println("3. Mostrar lista de reservas");
+                System.out.println("4. Salir");
                 System.out.println("----------------------------------------------------\n");
 
                 try {
                     int opcionMenu2 = parseInt(utilities.makeQuestion("Escoge una opción"));
 
                     switch (opcionMenu2) {
+
+                        //MOSTRAR LISTA DE LIBROS
                         case 1:
                             System.out.println(biblioteca.mostrarLibros());
                             break;
+
+                            //MOSTRAR LISTA DE LIBROS DISPONIBLES
                         case 2:
                             biblioteca.mostrarLibrosDisponibles();
                             break;
+
+                            //MOSTRAR LISTA DE RESERVAS
                         case 3:
+                            reserva.mostrarReservas();
+                            break;
+
+                            //SALIR
+                        case 4:
                             System.exit(0);
                             break;
                     }
