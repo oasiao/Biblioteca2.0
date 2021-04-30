@@ -320,8 +320,12 @@ public class Bibliotecario extends Persona {
 
         //Recorremos la lista
         for (int i = 0; i < getListaBibliotecarios().size(); i++) {
+            if(NIF.equals("00000000A"))
+            {
+                System.out.println("\n--------------No puedes cambiar la contraseña del administrador.--------------\n");
+                break;
+            }
             if (getListaBibliotecarios().get(i).getNIF().equals(NIF)) {
-
                 //SOLICITAMOS LA CONTRASEÑA ANTIGUA
                 String contraseñaAntigua = utilities.makeQuestion("Introduce tu contraseña antigua");
 
