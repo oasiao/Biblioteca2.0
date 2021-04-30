@@ -3,22 +3,23 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
-public class Usuario extends Persona{
+public class Usuario extends Persona {
     private int telefono;
     private String direccion;
     private int codigoPostal;
     private String correoElectronico;
-    private List<Reserva> listaReservas=new ArrayList<>();
+    private List<Reserva> listaReservas = new ArrayList<>();
 
     //Necesitamos una lista de usuarios
-    private static List<Usuario> listaUsuarios=new ArrayList<>();
+    private static List<Usuario> listaUsuarios = new ArrayList<>();
 
     //constructor vacío
-    public Usuario(){}
+    public Usuario() {
+    }
 
     //constructor con todos los parámetros
-    public Usuario(String nombre, String apellido1, String apellido2, int edad,String type,int telefono, String direccion, int codigoPostal, String correoElectronico) {
-        super(nombre,apellido1,apellido2,edad,type);
+    public Usuario(String nombre, String apellido1, String apellido2, int edad, String type, int telefono, String direccion, int codigoPostal, String correoElectronico) {
+        super(nombre, apellido1, apellido2, edad, type);
         this.telefono = telefono;
         this.direccion = direccion;
         this.codigoPostal = codigoPostal;
@@ -36,8 +37,8 @@ public class Usuario extends Persona{
                 + "\nDirección: " + direccion
                 + "\nCódigo Postal: " + codigoPostal
                 + "\nTeléfono: " + getTelefono()
-                + "\nCorreo Electrónico: "+ getCorreoElectronico()
-                +"\nTipo: "+super.getType()
+                + "\nCorreo Electrónico: " + getCorreoElectronico()
+                + "\nTipo: " + super.getType()
                 + "\n-------------------------\n";
     }
 
@@ -91,9 +92,9 @@ public class Usuario extends Persona{
     }
 
     //MÉTODOS
-    public void solicitarDatosUsuario(String nombre, String apellido1, String apellido2, int edad, String type){
+    public void solicitarDatosUsuario(String nombre, String apellido1, String apellido2, int edad, String type) {
         //INSTANCIAMOS
-        Bibliotecario bibliotecario=new Bibliotecario();
+        Bibliotecario bibliotecario = new Bibliotecario();
         Biblioteca biblioteca = new Biblioteca();
         Utilities utilities = new Utilities();
 
@@ -124,7 +125,7 @@ public class Usuario extends Persona{
 
             //TODO MENU: esto lo añadiría en el MENU
             //si el bibliotecario inicia sesión, entonces, podrá realizar operaciones en la biblioteca
-            if(Bibliotecario.getLogin()==true){
+            if (Bibliotecario.getLogin() == true) {
                 App.menuBibliotecario();
             } else {
                 bibliotecario.logInOrRegister();
@@ -153,18 +154,16 @@ public class Usuario extends Persona{
         String correoElectronico = utilities.makeQuestion("Introduce tu correo electrónico");
 
         for (int i = 0; i < getListaUsuarios().size(); i++) {
-            if (getListaUsuarios().get(i).getTelefono()==numTel && getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronico)) {
+            if (getListaUsuarios().get(i).getTelefono() == numTel && getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronico)) {
                 Bibliotecario.setLogin(true);
                 System.out.println("\n Bienvenido, " + getListaUsuarios().get(i).getNombre() + ".\n");
-            } else {
-                System.out.println("ERROR. Usuario incorrecto.\n");
-                //TODO MENU logIn
-                bibliotecario.logInOrRegister();
             }
         }
+        System.out.println("ERROR. Usuario incorrecto.\n");
+        bibliotecario.logInOrRegister();
     }
 
-    public void cambiarContraseñaUsuario(){
+    public void cambiarContraseñaUsuario() {
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
         Usuario usuario = new Usuario();
@@ -174,8 +173,8 @@ public class Usuario extends Persona{
         int numTel = parseInt(utilities.makeQuestion("Introduce tu número de teléfono"));
 
         for (int i = 0; i < getListaUsuarios().size(); i++) {
-            if (getListaUsuarios().get(i).getTelefono()==numTel) {
-                String correoElectronicoAntiguo=utilities.makeQuestion("Introduce tu correo electrónico antiguo");
+            if (getListaUsuarios().get(i).getTelefono() == numTel) {
+                String correoElectronicoAntiguo = utilities.makeQuestion("Introduce tu correo electrónico antiguo");
                 if (getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronicoAntiguo)) {
                     String correoElectronicoNuevo = utilities.makeQuestion("Introduce tu nuevo correo electrónico");
                     getListaUsuarios().get(i).setCorreoElectronico(correoElectronicoNuevo);
@@ -186,10 +185,11 @@ public class Usuario extends Persona{
             }
         }
     }
-    public String mostrarUsuarios(){
-        String usuarios="";
+
+    public String mostrarUsuarios() {
+        String usuarios = "";
         for (int i = 0; i < getListaUsuarios().size(); i++) {
-            usuarios+=getListaUsuarios().get(i).toString()+"\n";
+            usuarios += getListaUsuarios().get(i).toString() + "\n";
         }
         return usuarios;
     }
