@@ -1,3 +1,4 @@
+import static java.lang.Integer.getInteger;
 import static java.lang.Integer.parseInt;
 
 public abstract class Persona {

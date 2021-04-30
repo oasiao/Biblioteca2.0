@@ -186,4 +186,11 @@ public class Usuario extends Persona{
             }
         }
     }
+    public String mostrarUsuarios(){
+        String usuarios="";
+        for (int i = 0; i < getListaUsuarios().size(); i++) {
+            usuarios+=getListaUsuarios().get(i).toString()+"\n";
+        }
+        return usuarios;
+    }
 }

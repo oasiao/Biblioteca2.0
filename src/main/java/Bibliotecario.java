@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -185,7 +184,7 @@ public class Bibliotecario extends Persona {
 
     public void logInBibliotecario() {
         Utilities utilities = new Utilities();
-        String NIF = utilities.makeQuestion("Introduce usuario (NIF)");
+        String NIF = utilities.makeQuestion("Introduce usuario (NIF)").toUpperCase();
         String contraseña = utilities.makeQuestion("Introduce tu contraseña");
 
         for (int i = 0; i < getListaBibliotecarios().size(); i++) {
@@ -194,12 +193,16 @@ public class Bibliotecario extends Persona {
                 setLogin(true);
                 System.out.println("\n Bienvenido, " + getListaBibliotecarios().get(i).getNombre() + ".\n");
                 App.menuBibliotecario();
-            } else {
-                System.out.println("ERROR. Usuario incorrecto.\n");
-                logInOrRegister();
             }
         }
+        System.out.println("Error! El usuario no existe");
+        logInOrRegister();
     }
+    public void logOut() {
+        setLogin(false);
+        logInOrRegister();
+    }
+
 
     public void añadirPersonal() {
         super.solicitarDatosPersona();
@@ -250,12 +253,7 @@ public class Bibliotecario extends Persona {
             }
         }
 
-    public void logOut() {
-        setLogin(false);
-    }
-
-
-    //TODO si cambia en la lista de Bibliotecarios, tambien cambia en la lista de personas
+    //TODO si cambia en la lista de Bibliotecarios, también cambia en la lista de personas
 
     public void cambiarContraseñaBibliotecario(){
         //INSTANCIAMOS
@@ -277,5 +275,13 @@ public class Bibliotecario extends Persona {
                 System.out.println("ERROR. Usuario incorrecto.\n");
             }
         }
+    }
+
+    public String mostrarBibliotecarios(){
+        String personal="";
+        for (int i = 0; i < getListaBibliotecarios().size(); i++) {
+            personal+=getListaBibliotecarios().get(i).toString()+"\n";
+        }
+        return personal;
     }
 }

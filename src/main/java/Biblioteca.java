@@ -79,6 +79,14 @@ public class Biblioteca {
         return librosDisponibles;
     }
 
+    public String mostrarPersonas(){
+        String personas="";
+        for (int i = 0; i < getPersonas().size(); i++) {
+            personas+=getPersonas().get(i).toString()+"\n";
+        }
+        return personas;
+    }
+
 
     //TO STRING BIBLIOTECA
     @Override

@@ -167,7 +167,9 @@ public class App {
                 System.out.println("1. Añadir personal");
                 System.out.println("2. Eliminar personal");
                 System.out.println("3. Listar personal de la biblioteca");
-                System.out.println("4. Salir");
+                System.out.println("4. Listar usuarios registrados");
+                System.out.println("5. Listar personal absoluto");
+                System.out.println("6. Salir");
                 System.out.println("----------------------------------------------------\n");
 
                 try {
@@ -189,9 +191,15 @@ public class App {
                             while (confirm == 1);
                             break;
                         case 3:
-                            System.out.println(Bibliotecario.getListaBibliotecarios().toString());
+                            System.out.println(bibliotecario.mostrarBibliotecarios());
                             break;
                         case 4:
+                            System.out.println(usuario.mostrarUsuarios());
+                            break;
+                        case 5:
+                            System.out.println(biblioteca.mostrarPersonas());
+                            break;
+                        case 6:
                             App.menuBibliotecario();
                             break;
                     }
