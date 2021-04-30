@@ -244,7 +244,7 @@ public class App {
         //OPCIONES A MENU USUARIO
         System.out.println("----------------MENÚ USUARIO----------------");
         System.out.println("1. Buscar libro por titulo");
-        System.out.println("2. Cambiar contraseña");
+        System.out.println("2. Cambiar correo electrónico");
         System.out.println("3. Cerrar Sesión");
         System.out.println("4. Salir");
         System.out.println("--------------------------------------------\n");

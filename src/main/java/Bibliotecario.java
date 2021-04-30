@@ -361,6 +361,10 @@ public class Bibliotecario extends Persona {
                     System.out.println("ERROR. Usuario incorrecto.\n");
                 }
             }
+            else
+            {
+                System.out.println("ERROR. Usuario incorrecto.\n");
+            }
         }
     }
 

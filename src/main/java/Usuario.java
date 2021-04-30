@@ -167,6 +167,9 @@ public class Usuario extends Persona {
         Usuario usuario = new Usuario();
         Bibliotecario bibliotecario = new Bibliotecario();
 
+        //CONTROL CONTRASEÑA
+        int contador=0;
+
         //SOLICITAMOS LOS DATOS
         //numTEL
         int numTel = parseInt(utilities.makeQuestion("Introduce tu número de teléfono"));
@@ -177,18 +180,26 @@ public class Usuario extends Persona {
 
 
         for (int i = 0; i < getListaUsuarios().size(); i++) {
-            if (getListaUsuarios().get(i).getTelefono() == numTel && getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronico)) {
+            if (getListaUsuarios().get(i).getTelefono() == numTel){
+                    while(!getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronico) && contador<5){
+                        System.out.println("Correo electrónico incorrecto.");
+                        correoElectronico=utilities.makeQuestion("Introduce tu correo electrónico");
+                        contador++;
+                    }
+
+                    if(contador==5)
+                    {
+                        System.out.println("No te quedan intentos.");
+                        break;
+                    }
+
                 Bibliotecario.setLogin(true);
                 System.out.println("\n ---------------Bienvenido, " + getListaUsuarios().get(i).getNombre() + ".------------------------\n");
                 App.menuUsuario();
-            }
-            else
-            {
-                System.out.println("ERROR. ¡USUARIO INCORRECTO!\n");
-                bibliotecario.logInOrRegister();
-            }
+                }
         }
-
+        System.out.println("ERROR. ¡USUARIO INCORRECTO!\n");
+        bibliotecario.logInOrRegister();
     }
 
     public void cambiarContraseñaUsuario() {
