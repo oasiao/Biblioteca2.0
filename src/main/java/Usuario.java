@@ -102,12 +102,31 @@ public class Usuario extends Persona {
         //Teléfono
         int telefono = parseInt(utilities.makeQuestion("Introduce tu teléfono"));
 
+        //CONTROL NÚMERO DE TELÉFONO
+        while(control(telefono).length()!=9){
+            System.out.println("Este número no existe. Vuelve a introducir tu número de teléfono!");
+            telefono=parseInt(utilities.makeQuestion("Introduce tu número de teléfono"));
+        }
+
         //Dirección y código postal
         String direccion = utilities.makeQuestion("Introduce dirección");
         int codigoPostal = parseInt(utilities.makeQuestion("Introduce código postal"));
 
+        //CONTROL CÓDIGO POSTAL
+        while(control(codigoPostal).length()>5){
+            System.out.println("El código postal introducido no existe. Vuelve a introducir su código postal!");
+            codigoPostal=parseInt(utilities.makeQuestion("Introduce código postal"));
+        }
+
         //Correo electrónico
         String correoElectronico = utilities.makeQuestion("Introduce tu correo electrónico");
+
+        //CONTROL CORREO ELECTRÓNICO
+        while(!correoElectronico.contains("@")&&!correoElectronico.contains("."))
+        {
+            System.out.println("Este correo electrónico no existe. Vuelve a introducir tu correo electrónico!");
+            correoElectronico=utilities.makeQuestion("Introduce tu correo electrónico");
+        }
 
 
         //Los int's los pasamos a string para poder hacer el control
@@ -122,6 +141,8 @@ public class Usuario extends Persona {
 
             //añadimos el mismo usuario en la lista que hemos creado en esta clase (en esta lista solo hay usuarios)
             getListaUsuarios().add(new Usuario(nombre, apellido1, apellido2, edad, type, telefono, direccion, codigoPostal, correoElectronico));
+
+            System.out.println("\n-----------------¡Usuario registrado!--------------------\n");
 
             //TODO MENU: esto lo añadiría en el MENU
             //si el bibliotecario inicia sesión, entonces, podrá realizar operaciones en la biblioteca
@@ -153,14 +174,21 @@ public class Usuario extends Persona {
         //correo electronico
         String correoElectronico = utilities.makeQuestion("Introduce tu correo electrónico");
 
+
+
         for (int i = 0; i < getListaUsuarios().size(); i++) {
             if (getListaUsuarios().get(i).getTelefono() == numTel && getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronico)) {
                 Bibliotecario.setLogin(true);
-                System.out.println("\n Bienvenido, " + getListaUsuarios().get(i).getNombre() + ".\n");
+                System.out.println("\n ---------------Bienvenido, " + getListaUsuarios().get(i).getNombre() + ".------------------------\n");
+                App.menuUsuario();
+            }
+            else
+            {
+                System.out.println("ERROR. ¡USUARIO INCORRECTO!\n");
+                bibliotecario.logInOrRegister();
             }
         }
-        System.out.println("ERROR. Usuario incorrecto.\n");
-        bibliotecario.logInOrRegister();
+
     }
 
     public void cambiarContraseñaUsuario() {
@@ -175,10 +203,30 @@ public class Usuario extends Persona {
         for (int i = 0; i < getListaUsuarios().size(); i++) {
             if (getListaUsuarios().get(i).getTelefono() == numTel) {
                 String correoElectronicoAntiguo = utilities.makeQuestion("Introduce tu correo electrónico antiguo");
+
+                //CONTROL DEL CORREO ELECTRÓNICO ANTIGUO
+                while(!getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronicoAntiguo))
+                {
+                    System.out.println("Correo electronico incorrecto. Vuelve a introducir su correo electronico antiguo!");
+                    correoElectronicoAntiguo=utilities.makeQuestion("Introduce tu correo electrónico antiguo");
+                }
+
                 if (getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronicoAntiguo)) {
                     String correoElectronicoNuevo = utilities.makeQuestion("Introduce tu nuevo correo electrónico");
+
+                    //CONTROL CORREO ELECTRÓNICO
+                    while(!correoElectronicoNuevo.contains("@")&&!correoElectronicoNuevo.contains("."))
+                    {
+                        System.out.println("Este correo electrónico no existe. Vuelve a introducir tu correo electrónico!");
+                        correoElectronicoNuevo=utilities.makeQuestion("Introduce tu nuevo correo electrónico");
+                    }
+
                     getListaUsuarios().get(i).setCorreoElectronico(correoElectronicoNuevo);
                     System.out.println("----------------CORREO ELECTRÓNICO CAMBIADO----------------");
+                }
+                else
+                {
+                    System.out.println("ERROR. Usuario incorrecto.\n");
                 }
             } else {
                 System.out.println("ERROR. Usuario incorrecto.\n");
@@ -192,5 +240,11 @@ public class Usuario extends Persona {
             usuarios += getListaUsuarios().get(i).toString() + "\n";
         }
         return usuarios;
+    }
+
+    //creamos este método para poder hacer un control de los datos que introducimos
+    public String control(int var){
+        String control=Integer.toString(var);
+        return control;
     }
 }

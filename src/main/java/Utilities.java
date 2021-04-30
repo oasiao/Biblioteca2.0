@@ -8,7 +8,7 @@ public class Utilities {
         try {
             InputStreamReader isr = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader (isr);
-            System.out.print(enunciado+"  : ");
+            System.out.print(enunciado+": ");
             valor = br.readLine();
         } catch (IOException ex) {
             System.out.println("Error");

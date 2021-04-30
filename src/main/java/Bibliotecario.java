@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
 
@@ -14,13 +15,16 @@ public class Bibliotecario extends Persona {
     //Creamos un boolean login
     private static boolean login;
 
+    //CREAMOS una var para la contraseña
+    private static boolean passwordValida = false;
+
     //constructor vacio
     public Bibliotecario() {
     }
 
     //constructor parametros
-    public Bibliotecario(String nombre, String apellido1, String apellido2, int edad,String type, String puestoTrabajo, String NIF, String contraseña) {
-        super(nombre, apellido1, apellido2, edad,type);
+    public Bibliotecario(String nombre, String apellido1, String apellido2, int edad, String type, String puestoTrabajo, String NIF, String contraseña) {
+        super(nombre, apellido1, apellido2, edad, type);
         this.puestoTrabajo = puestoTrabajo;
         this.NIF = NIF;
         this.contraseña = contraseña;
@@ -85,6 +89,29 @@ public class Bibliotecario extends Persona {
         }
     }
 
+    public static boolean isPasswordValida(String password) {
+        boolean mayus = false;
+        boolean num = false;
+        boolean minus = false;
+        if (password.length() >= 8) {
+            for (int i = 0; i < password.length(); i++) {
+                if (Character.isUpperCase(password.charAt(i))) {
+                    mayus = true;
+                } else if (Character.isLowerCase(password.charAt(i))) {
+                    minus = true;
+                } else if (Character.isDigit(password.charAt(i))) {
+                    num = true;
+                }
+            }
+        }
+        passwordValida = mayus && num && minus;
+        return passwordValida;
+    }
+
+    public static void setPasswordValida(boolean passwordValida) {
+        Bibliotecario.passwordValida = passwordValida;
+    }
+
 
     //MÉTODOS
     public void solicitarDatosBibliotecario(String nombre, String apellido1, String apellido2, int edad, String type) {
@@ -97,11 +124,22 @@ public class Bibliotecario extends Persona {
         String puestoTrabajo = utilities.makeQuestion("Introduce tu puesto de trabajo");
 
         //Nif
-        String NIF = utilities.makeQuestion("Introduce tu NIF");
+        String NIF = utilities.makeQuestion("Introduce tu NIF").toUpperCase();
+        //CONTROL CÓDIGO POSTAL
+        while (NIF.length() != 9) {
+            System.out.println("El NIF introducido es incorrecto. Inténtelo de nuevo!");
+            NIF = utilities.makeQuestion("Introduce tu NIF").toUpperCase();
+        }
+
 
         //Contraseña
+        setPasswordValida(false);
         String contraseña = utilities.makeQuestion("Introduce tu contraseña");
 
+        while (!isPasswordValida(contraseña)) {
+            System.out.println("Introduce una contraseña más segura que tenga mínimo 8 carácteres y contenga números, mayúsculas y minúsculas");
+            contraseña = utilities.makeQuestion("Introduce una contraseña");
+        }
 
         //CONTROL DE DATOS
         if (!puestoTrabajo.isEmpty() && !NIF.isEmpty() && !contraseña.isEmpty()) {
@@ -111,7 +149,7 @@ public class Bibliotecario extends Persona {
             //Añade el bibliotecario a la lista que hemos creado en esta clase
             getListaBibliotecarios().add(new Bibliotecario(nombre, apellido1, apellido2, edad, type, puestoTrabajo, NIF, contraseña));
 
-            System.out.println("¡Bibliotecario registrado!");
+            System.out.println("\n-----------------------¡Bibliotecario registrado!---------------------\n");
 
             //el bibliotecario puede añadir nuevo personal, por tanto, si ya ha hecho log in, volverá al menu sino, tendrá que iniciar sesión
             if (getLogin()) {
@@ -152,7 +190,7 @@ public class Bibliotecario extends Persona {
                 logInOrRegister(); //A continuación, damos a elegir al usuario si quiere iniciar sesión o salir
                 break;
 
-                //INICIAR SESIÓN
+            //INICIAR SESIÓN
             case 2:
                 String user = utilities.makeQuestion("¿Bibliotecario(B), o Usuario(U)?").toUpperCase();
 
@@ -162,7 +200,6 @@ public class Bibliotecario extends Persona {
                         break;
                     case "U":
                         usuario.logInUsuario();
-                        App.menuUsuario();
                         break;
                     default:
                         System.out.println("ERROR");
@@ -170,7 +207,7 @@ public class Bibliotecario extends Persona {
                 }
                 break;
 
-                //SALIR
+            //SALIR
             case 3:
                 System.exit(0);
                 break;
@@ -187,17 +224,33 @@ public class Bibliotecario extends Persona {
         String NIF = utilities.makeQuestion("Introduce usuario (NIF)").toUpperCase();
         String contraseña = utilities.makeQuestion("Introduce tu contraseña");
 
+        //CONTADOR
+        int contador=0;
         for (int i = 0; i < getListaBibliotecarios().size(); i++) {
-            if (getListaBibliotecarios().get(i).toString().contains(NIF) &&
-                    getListaBibliotecarios().get(i).toString().contains(contraseña)) {
+            if (getListaBibliotecarios().get(i).getNIF().equals(NIF))
+            {
+                while(!getListaBibliotecarios().get(i).getContraseña().equals(contraseña) && contador!=5)
+                {
+                    contador++;
+                    System.out.println("Has introducido mal la contraseña. Vuelve a intentarlo");
+                    contraseña = utilities.makeQuestion("Introduce tu contraseña");
+                }
+
+                if(contador==5)
+                {
+                    System.out.println("---------------No te quedan intentos.---------------");
+                    break;
+                }
+
                 setLogin(true);
                 System.out.println("\n Bienvenido, " + getListaBibliotecarios().get(i).getNombre() + ".\n");
                 App.menuBibliotecario();
             }
         }
-        System.out.println("Error! El usuario no existe");
+        System.out.println("¡ERROR!");
         logInOrRegister();
     }
+
     public void logOut() {
         setLogin(false);
         logInOrRegister();
@@ -218,7 +271,7 @@ public class Bibliotecario extends Persona {
 
                 //LO BORRAMOS EN LA LISTA CREADA SOLO PARA BIBLIOTECARIOS
                 for (int j = 0; j < getListaBibliotecarios().size(); j++) {
-                    if(getListaBibliotecarios().get(j).getNIF().equals(opcion)){
+                    f(getListaBibliotecarios().get(j).getNIF().equals(opcion)){
                         getListaBibliotecarios().remove(j);
                     }
                 }
@@ -232,56 +285,87 @@ public class Bibliotecario extends Persona {
         }
     }*/
 
-    public void eliminarPersonal(){
-        Utilities utilities= new Utilities();
-        String opcion=utilities.makeQuestion("Introduce el NIF").toUpperCase();
+    public void eliminarPersonal() {
+        Utilities utilities = new Utilities();
+        String opcion = utilities.makeQuestion("Introduce el NIF").toUpperCase();
 
         for (int i = 0; i < Biblioteca.getPersonas().size(); i++) {
-                for (int j = 0; j < getListaBibliotecarios().size(); j++) {
-                    if(Biblioteca.getPersonas().get(i).toString().contains(opcion) &&
-                            Biblioteca.getPersonas().get(i).toString().equals(getListaBibliotecarios().get(j).toString())){
+            for (int j = 0; j < getListaBibliotecarios().size(); j++) {
+                if (Biblioteca.getPersonas().get(i).toString().contains(opcion) &&
+                        Biblioteca.getPersonas().get(i).toString().equals(getListaBibliotecarios().get(j).toString())) {
 
-                        Biblioteca.getPersonas().remove(i);
-                        getListaBibliotecarios().remove(j);
+                    Biblioteca.getPersonas().remove(i);
+                    getListaBibliotecarios().remove(j);
 
-                        System.out.println("-------------------ELIMINADO CON ÉXITO------------------");
-                        break;
-                    } else {
-                        System.out.println("El elemento no existe");
-                    }
+                    System.out.println("-------------------ELIMINADO CON ÉXITO------------------");
+                    break;
+                } else {
+                    System.out.println("El elemento no existe");
                 }
             }
         }
+    }
 
     //TODO si cambia en la lista de Bibliotecarios, también cambia en la lista de personas
 
-    public void cambiarContraseñaBibliotecario(){
+    public void cambiarContraseñaBibliotecario() {
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
 
         //SOLICITAMOS LOS DATOS
         String NIF = utilities.makeQuestion("Introduce tu NIF");
 
+        //NUMERO DE INTENTOS
+        int contador=0;
+
         //Recorremos la lista
         for (int i = 0; i < getListaBibliotecarios().size(); i++) {
             if (getListaBibliotecarios().get(i).getNIF().equals(NIF)) {
-                String contraseñaAntigua=utilities.makeQuestion("Introduce tu contraseña antigua");
-                if (getListaBibliotecarios().get(i).getContraseña().equals(contraseñaAntigua)) {
-                    String contraseñaNueva = utilities.makeQuestion("Introduce tu nueva contraseña");
-                    getListaBibliotecarios().get(i).setContraseña(contraseñaNueva);
-                    System.out.println("----------------CONTRASEÑA CAMBIADA----------------\n");
+
+                //SOLICITAMOS LA CONTRASEÑA ANTIGUA
+                String contraseñaAntigua = utilities.makeQuestion("Introduce tu contraseña antigua");
+
+                //SI NO COINCIDE CON LA CONTRASEÑA
+                while(!getListaBibliotecarios().get(i).getContraseña().equals(contraseñaAntigua) && contador<5)
+                {
+                    System.out.println("La contraseña que has introducido no coincide.");
+                    contraseñaAntigua = utilities.makeQuestion("Introduce tu contraseña antigua");
+                    contador++;
                 }
-            } else {
-                System.out.println("ERROR. Usuario incorrecto.\n");
+
+                if (contador==5)
+                {
+                    System.out.println("\n-----------NO TE QUEDAN MÁS INTENTOS. VUELVE A INTENTARLO MÁS TARDE---------------\n");
+                    break;
+                }
+
+                if (getListaBibliotecarios().get(i).getContraseña().equals(contraseñaAntigua)) {
+
+                    String contraseñaNueva = utilities.makeQuestion("Introduce tu nueva contraseña");
+
+                    setPasswordValida(false);
+                    while (!isPasswordValida(contraseñaNueva)) {
+                        System.out.println("Introduce una contraseña más segura que tenga mínimo 8 carácteres y contenga números, mayúsculas y minúsculas");
+                        contraseñaNueva = utilities.makeQuestion("Introduce una contraseña");
+                    }
+
+                    getListaBibliotecarios().get(i).setContraseña(contraseñaNueva);
+                    System.out.println("\n----------------CONTRASEÑA CAMBIADA----------------\n");
+                }
+                else
+                {
+                    System.out.println("ERROR. Usuario incorrecto.\n");
+                }
             }
         }
     }
 
-    public String mostrarBibliotecarios(){
-        String personal="";
+    public String mostrarBibliotecarios() {
+        String personal = "";
         for (int i = 0; i < getListaBibliotecarios().size(); i++) {
-            personal+=getListaBibliotecarios().get(i).toString()+"\n";
+            personal += getListaBibliotecarios().get(i).toString() + "\n";
         }
         return personal;
     }
+
 }

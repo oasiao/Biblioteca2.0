@@ -1,3 +1,6 @@
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import static java.lang.Integer.getInteger;
 import static java.lang.Integer.parseInt;
 
@@ -69,6 +72,9 @@ public abstract class Persona {
         //INSTANCIAMOS LAS CLASES NECESARIAS
         Utilities utilities = new Utilities();
         Usuario usuario = new Usuario();
+        Date date = new Date();
+        SimpleDateFormat getYearFormat = new SimpleDateFormat("yyyy");
+        int currentYear =parseInt(getYearFormat.format(date));
         Bibliotecario bibliotecario = new Bibliotecario();
 
         String persona = "";
@@ -82,7 +88,17 @@ public abstract class Persona {
         String apellido2 = utilities.makeQuestion("Ingresa tu segundo apellido");
 
         //EDAD
-        int edad = parseInt(utilities.makeQuestion("Ingresa edad"));
+        //creo que es mejor pedir el año de nacimiento
+        int year = parseInt(utilities.makeQuestion("Ingresa tu año de nacimiento"));
+        int edad=currentYear-year;
+        while(edad<18)
+        {
+            System.out.println("---------------No podemos registrarte. Tienes "+edad+" años, eres menor de edad.-----------------");
+            bibliotecario.logInOrRegister();
+            break;
+        }
+
+        //TYPE
         String type;
 
         //Los int's los pasamos a string para poder hacer el control
