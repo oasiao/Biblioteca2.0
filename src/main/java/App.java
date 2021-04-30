@@ -205,7 +205,7 @@ public class App {
                     }
                     App.menuBibliotecario();
                 } catch (InputMismatchException e) {
-                    System.out.println("El caracter introducido no es válido");
+                    System.out.println("El carácter introducido no es válido");
                 }
                 break;
 
