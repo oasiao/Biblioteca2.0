@@ -125,37 +125,56 @@ public class Libro {
         //INSTANCIAMOS
         Biblioteca biblioteca = new Biblioteca();
         Utilities utilities = new Utilities();
+        boolean libroRepetido=false;
 
         //SOLICITAMOS LOS DATOS DEL LIBRO
         //isbn
         String isbn=utilities.makeQuestion("Introduce el isbn del libro");
-
-        //titulo
-        String title = utilities.makeQuestion("Introduce el titulo del libro: ");
-
-        //Autor
-        String author = utilities.makeQuestion("Introduce el autor del libro: ");
-
-        //editorial
-        String editorial = utilities.makeQuestion("Introduce la editorial del libro: ");
-
-        //Número de copias del libro
-        /*Debe haber un control en el setter de manera que el número de copias inicial nunca debe ser menos de 1.*/
-        int numCopias = parseInt(utilities.makeQuestion("Introduce el número de copias del libro: "));
-        if (numCopias == 0) {
-            numCopias = 1;
+        for (int i = 0; i < Biblioteca.getLibros().size(); i++) {
+            if(Biblioteca.getLibros().get(i).getIsbn().equals(isbn))
+            {
+                System.out.println("Este libro ya existe.");
+                libroRepetido=true;
+                String answer=utilities.makeQuestion("¿Quieres añadir libros disponibles a este libro? Sí (1), No (0)");
+                if(answer.equals("1"))
+                {
+                    int numCopiasDisponibles=parseInt(utilities.makeQuestion("Cuántas copias quieres añadir?"));
+                    Biblioteca.getLibros().get(i).setNumCopiasDisponibles(Biblioteca.getLibros().get(i).getNumCopiasDisponibles()+numCopiasDisponibles);
+                    System.out.println("\n -------------------------Copias añadidas-------------------------\n");
+                }
+                else
+                {
+                    break;
+                }
+            }
         }
-        //número de copias disponibles
-        int numCopiasDispo=parseInt(utilities.makeQuestion("Introduce el número de copias disponibles del libro: "));
+        if(libroRepetido==false){
+            //titulo
+            String title = utilities.makeQuestion("Introduce el titulo del libro: ");
 
-        //AÑADIMOS EL LIBRO
-        Libro libro = new Libro(isbn, title, author, editorial, numCopias, numCopiasDispo); //libro formato objeto
-        biblioteca.getLibros().add(libro); //añadimos el libro en la lista
-        setNumLibros(getNumLibros()+1); //sumamos uno a la cantidad de libros que hay
+            //Autor
+            String author = utilities.makeQuestion("Introduce el autor del libro: ");
 
-        //MENSAJE DE SUCCESS
-        System.out.println("¡El libro se ha introducido con éxito!");
+            //editorial
+            String editorial = utilities.makeQuestion("Introduce la editorial del libro: ");
 
+            //Número de copias del libro
+            /*Debe haber un control en el setter de manera que el número de copias inicial nunca debe ser menos de 1.*/
+            int numCopias = parseInt(utilities.makeQuestion("Introduce el número de copias del libro: "));
+            if (numCopias == 0) {
+                numCopias = 1;
+            }
+            //número de copias disponibles
+            int numCopiasDispo=parseInt(utilities.makeQuestion("Introduce el número de copias disponibles del libro: "));
+
+            //AÑADIMOS EL LIBRO
+            Libro libro = new Libro(isbn, title, author, editorial, numCopias, numCopiasDispo); //libro formato objeto
+            biblioteca.getLibros().add(libro); //añadimos el libro en la lista
+            setNumLibros(getNumLibros()+1); //sumamos uno a la cantidad de libros que hay
+
+            //MENSAJE DE SUCCESS
+            System.out.println("¡El libro se ha introducido con éxito!");
+        }
     }
 
     /*- Eliminar libro: Solicitará al usuario un ISBN, lo buscará y lo eliminará de la lista

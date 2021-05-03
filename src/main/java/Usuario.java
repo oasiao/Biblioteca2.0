@@ -122,7 +122,7 @@ public class Usuario extends Persona {
         String correoElectronico = utilities.makeQuestion("Introduce tu correo electrónico");
 
         //CONTROL CORREO ELECTRÓNICO
-        while(!correoElectronico.contains("@")&&!correoElectronico.contains("."))
+        while(!correoElectronico.contains("@") && !correoElectronico.contains("."))
         {
             System.out.println("Este correo electrónico no existe. Vuelve a introducir tu correo electrónico!");
             correoElectronico=utilities.makeQuestion("Introduce tu correo electrónico");
@@ -233,7 +233,7 @@ public class Usuario extends Persona {
                     }
 
                     getListaUsuarios().get(i).setCorreoElectronico(correoElectronicoNuevo);
-                    System.out.println("----------------CORREO ELECTRÓNICO CAMBIADO----------------");
+                    System.out.println("\n----------------CORREO ELECTRÓNICO CAMBIADO----------------\n");
                 }
                 else
                 {
