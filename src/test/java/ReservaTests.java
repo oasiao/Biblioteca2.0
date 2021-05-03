@@ -9,20 +9,4 @@ public class ReservaTests {
 
 
 
-
-    @Test
-    public void reserva(){
-        Libro libro = new Libro("isbn", "titulo", "autor", "editorial", 1);
-        Usuario usuario = new Usuario("nombre", "apellido1", "apellido2", 21,"type",603200924,
-                "direccion", 07015, "correoElectronico");
-
-        String show="------------------------------------------------\nReserva:\n" +
-                "Reservado por\n: " + usuario + "\n" +
-                "Fecha y hora:" + reserva.getFechaYHora() + "\n------------------------------------------------\n";
-        String expectedShow=reserva.mostrarReservas();
-        Assertions.assertEquals(expectedShow,show);
-
-
-    }
-
 }

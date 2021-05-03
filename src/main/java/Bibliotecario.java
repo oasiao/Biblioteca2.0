@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
 
@@ -13,13 +12,9 @@ import static java.lang.Integer.parseInt;
 
 
 public class Bibliotecario extends Persona {
-    /**
-     * Atributos especificos de bibliotecario: puesto de trabajo, nif y contrasenya; almacena lista de bibliotecarios,
-     * control del login y validacion del password.
-     */
     private String puestoTrabajo;
     private String NIF;
-    private String contraseña;
+    private String password;
 
     //Creamos una nueva lista, solo para bibliotecarios
     private static List<Bibliotecario> listaBibliotecarios = new ArrayList<>();
@@ -47,13 +42,13 @@ public class Bibliotecario extends Persona {
      * @param type
      * @param puestoTrabajo
      * @param NIF
-     * @param contraseña
+     * @param password
      */
-    public Bibliotecario(String nombre, String apellido1, String apellido2, int edad, String type, String puestoTrabajo, String NIF, String contraseña) {
+    public Bibliotecario(String nombre, String apellido1, String apellido2, int edad, String type, String puestoTrabajo, String NIF, String password) {
         super(nombre, apellido1, apellido2, edad, type);
         this.puestoTrabajo = puestoTrabajo;
         this.NIF = NIF;
-        this.contraseña = contraseña;
+        this.password = password;
     }
 
     /**
@@ -65,7 +60,7 @@ public class Bibliotecario extends Persona {
         return "------------------------\n"
                 + "\nNIF: " + NIF
                 + "\nPuesto: " + puestoTrabajo
-                + "\nContraseña: " + contraseña
+                + "\nContraseña: " + password
                 + "\nTipo: " + super.getType()
                 + "\n-------------------------\n";
     }
@@ -95,17 +90,17 @@ public class Bibliotecario extends Persona {
      *
      * @return devuelve la contraseña de bibliotecario.
      */
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
     /**
      *
-     * @param contraseña establece la contraseña de bibliotecario.
+     * @param password establece la contraseña de bibliotecario.
      */
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
@@ -145,8 +140,8 @@ public class Bibliotecario extends Persona {
 
     /**
      *
-     * @param password le pasamos por parametro una contraseña y la valida
-     * @return devuelve la validacion de la contraseña.
+     * @param password le pasamos por parametro un password y la valida
+     * @return devuelve la validacion del password.
      */
     public static boolean isPasswordValida(String password) {
         boolean mayus = false;
@@ -169,7 +164,7 @@ public class Bibliotecario extends Persona {
 
     /**
      *
-     * @param passwordValida establece el estado de la contraseña.
+     * @param passwordValida establece el estado del password.
      */
     public static void setPasswordValida(boolean passwordValida) {
         Bibliotecario.passwordValida = passwordValida;
@@ -197,7 +192,7 @@ public class Bibliotecario extends Persona {
 
         //Nif
         String NIF = utilities.makeQuestion("Introduce tu NIF").toUpperCase();
-        //CONTROL CÓDIGO POSTAL
+        //CONTROL NIF
         while (NIF.length() != 9) {
             System.out.println("El NIF introducido es incorrecto. Inténtelo de nuevo!");
             NIF = utilities.makeQuestion("Introduce tu NIF").toUpperCase();
@@ -206,20 +201,20 @@ public class Bibliotecario extends Persona {
 
         //Contraseña
         setPasswordValida(false);
-        String contraseña = utilities.makeQuestion("Introduce tu contraseña");
+        String password = utilities.makeQuestion("Introduce tu password");
 
-        while (!isPasswordValida(contraseña)) {
-            System.out.println("Introduce una contraseña más segura que tenga mínimo 8 carácteres y contenga números, mayúsculas y minúsculas");
-            contraseña = utilities.makeQuestion("Introduce una contraseña");
+        while (!isPasswordValida(password)) {
+            System.out.println("Introduce una password más segura que tenga mínimo 8 carácteres y contenga números, mayúsculas y minúsculas");
+            password = utilities.makeQuestion("Introduce una password");
         }
 
         //CONTROL DE DATOS
-        if (!puestoTrabajo.isEmpty() && !NIF.isEmpty() && !contraseña.isEmpty()) {
+        if (!puestoTrabajo.isEmpty() && !NIF.isEmpty() && !password.isEmpty()) {
             //Añade el bibliotecario a la lista de Personas <usuario,bibliotecario>
-            Biblioteca.getPersonas().add(new Bibliotecario(nombre, apellido1, apellido2, edad, type, puestoTrabajo, NIF, contraseña));
+            Biblioteca.getPersonas().add(new Bibliotecario(nombre, apellido1, apellido2, edad, type, puestoTrabajo, NIF, password));
 
             //Añade el bibliotecario a la lista que hemos creado en esta clase
-            getListaBibliotecarios().add(new Bibliotecario(nombre, apellido1, apellido2, edad, type, puestoTrabajo, NIF, contraseña));
+            getListaBibliotecarios().add(new Bibliotecario(nombre, apellido1, apellido2, edad, type, puestoTrabajo, NIF, password));
 
             System.out.println("\n-----------------------¡Bibliotecario registrado!---------------------\n");
 
@@ -230,8 +225,8 @@ public class Bibliotecario extends Persona {
                 logInOrRegister();
             }
 
-            //SI NO CUMPLE CON EL CONTROL DE DATOS, ENTONCES, MOSTRARÁ EL MENSAJE ¡ERROR!
-        } else {
+            //SI NO CUMPLE CON EL CONTROL DE DATOS, ENTONCES, MOSTRARA EL MENSAJE ¡ERROR!
+        }else{
             System.out.println("ERROR. Vuelve a introducir los datos");
             solicitarDatosBibliotecario(nombre, apellido1, apellido2, edad, type);
         }
@@ -297,23 +292,23 @@ public class Bibliotecario extends Persona {
     }
 
     /**
-     * logInBibliotecario: control de inicio sesion para el bibliotecario, introduciendo el nif y la contraseña.
+     * logInBibliotecario: control de inicio sesion para el bibliotecario, introduciendo el nif y el password.
      */
     public void logInBibliotecario() {
         Utilities utilities = new Utilities();
         String NIF = utilities.makeQuestion("Introduce usuario (NIF)").toUpperCase();
-        String contraseña = utilities.makeQuestion("Introduce tu contraseña");
+        String password = utilities.makeQuestion("Introduce tu password");
 
         //CONTADOR
         int contador=0;
         for (int i = 0; i < getListaBibliotecarios().size(); i++) {
             if (getListaBibliotecarios().get(i).getNIF().equals(NIF))
             {
-                while(!getListaBibliotecarios().get(i).getContraseña().equals(contraseña) && contador!=5)
+                while(!getListaBibliotecarios().get(i).getPassword().equals(password) && contador!=5)
                 {
                     contador++;
-                    System.out.println("Has introducido mal la contraseña. Vuelve a intentarlo");
-                    contraseña = utilities.makeQuestion("Introduce tu contraseña");
+                    System.out.println("Has introducido mal la password. Vuelve a intentarlo");
+                    password = utilities.makeQuestion("Introduce tu password");
                 }
 
                 if(contador==5)
@@ -340,9 +335,9 @@ public class Bibliotecario extends Persona {
     }
 
     /**
-     * añadirPersonal: invoca al metodo solicitarDatosPersona() y crea nuevas personas.
+     * addPersonal: invoca al metodo solicitarDatosPersona() y crea nuevas personas.
      */
-    public void añadirPersonal() {
+    public void addPersonal() {
         super.solicitarDatosPersona();
     }
 
@@ -371,11 +366,11 @@ public class Bibliotecario extends Persona {
     }
 
     /**
-     * cambiarContraseñaBibliotecario: permite cambiar la contraseña del bibliotecario, pero jamas del
+     * cambiarPasswordBibliotecario: permite cambiar el password del bibliotecario, pero jamas del
      * usuario root (administrador).
      */
 
-    public void cambiarContraseñaBibliotecario() {
+    public void cambiarPasswordBibliotecario() {
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
 
@@ -394,32 +389,32 @@ public class Bibliotecario extends Persona {
             }
             if (getListaBibliotecarios().get(i).getNIF().equals(NIF)) {
                 //SOLICITAMOS LA CONTRASEÑA ANTIGUA
-                String contraseñaAntigua = utilities.makeQuestion("Introduce tu contraseña antigua");
+                String passwordAntigua = utilities.makeQuestion("Introduce tu contraseña antigua");
 
                 //SI NO COINCIDE CON LA CONTRASEÑA
-                while(!getListaBibliotecarios().get(i).getContraseña().equals(contraseñaAntigua) && contador<5)
+                while(!getListaBibliotecarios().get(i).getPassword().equals(passwordAntigua) && contador<5)
                 {
                     System.out.println("La contraseña que has introducido no coincide.");
-                    contraseñaAntigua = utilities.makeQuestion("Introduce tu contraseña antigua");
+                    passwordAntigua = utilities.makeQuestion("Introduce tu contraseña antigua");
                     contador++;
                 }
 
                 if (contador==5)
                 {
-                    System.out.println("\n-----------NO TE QUEDAN MÁS INTENTOS. VUELVE A INTENTARLO MÁS TARDE---------------\n");
+                    System.out.println("\n-----------NO TE QUEDAN MAS INTENTOS. VUELVE A INTENTARLO MAS TARDE---------------\n");
                     break;
                 }
 
-                if (getListaBibliotecarios().get(i).getContraseña().equals(contraseñaAntigua)) {
+                if (getListaBibliotecarios().get(i).getPassword().equals(passwordAntigua)) {
 
-                    String contraseñaNueva = utilities.makeQuestion("Introduce tu nueva contraseña");
+                    String passwordNueva = utilities.makeQuestion("Introduce tu nueva contraseña");
 
                     setPasswordValida(false);
-                    while (!isPasswordValida(contraseñaNueva)) {
+                    while (!isPasswordValida(passwordNueva)) {
                         System.out.println("Introduce una contraseña más segura que tenga mínimo 8 carácteres y contenga números, mayúsculas y minúsculas");
-                        contraseñaNueva = utilities.makeQuestion("Introduce una contraseña");
+                        passwordNueva = utilities.makeQuestion("Introduce una contraseña");
                     }
-                    getListaBibliotecarios().get(i).setContraseña(contraseñaNueva);
+                    getListaBibliotecarios().get(i).setPassword(passwordNueva);
                     System.out.println("\n----------------CONTRASEÑA CAMBIADA----------------\n");
                 }
                 else
@@ -427,7 +422,11 @@ public class Bibliotecario extends Persona {
                     System.out.println("ERROR. Usuario incorrecto.\n");
                 }
             }
+            else
+            {
                 System.out.println("ERROR. Usuario incorrecto.\n");
+            }
+
 
         }
     }

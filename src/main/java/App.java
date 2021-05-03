@@ -1,5 +1,4 @@
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
@@ -79,7 +78,7 @@ public class App {
                     switch (opcionMenu1) {
                         case 1:
                             do {
-                                libro.añadirLibro();
+                                libro.addLibro();
                                 confirm = parseInt(utilities.makeQuestion("Quieres añadir otro libro? Si(1) / No (0)"));
                             }
                             while (confirm == 1);
@@ -145,7 +144,7 @@ public class App {
 
                             //MOSTRAR LISTA DE LIBROS DISPONIBLES
                         case 2:
-                            System.out.println(biblioteca.mostrarLibrosDisponibles());;
+                            System.out.println(biblioteca.mostrarLibrosDisponibles());
                             break;
 
                             //MOSTRAR LISTA DE RESERVAS
@@ -186,7 +185,7 @@ public class App {
                     switch (opcionMenu3) {
                         case 1:
                             do {
-                                bibliotecario.añadirPersonal();
+                                bibliotecario.addPersonal();
                                 confirm = parseInt(utilities.makeQuestion("Quieres añadir más personal? Si(1) / No (0)"));
                             }
                             while (confirm == 1);
@@ -219,7 +218,7 @@ public class App {
 
             //CAMBIAR CONTRASEÑA
             case 4:
-                bibliotecario.cambiarContraseñaBibliotecario();
+                bibliotecario.cambiarPasswordBibliotecario();
                 App.menuBibliotecario();
                 break;
 
@@ -279,7 +278,7 @@ public class App {
 
 
             case 2:
-                usuario.cambiarContraseñaUsuario();
+                usuario.cambiarPasswordUsuario();
                 App.menuUsuario();
                 break;
 

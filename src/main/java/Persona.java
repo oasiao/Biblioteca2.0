@@ -141,7 +141,7 @@ public abstract class Persona {
         //Los int's los pasamos a string para poder hacer el control
         String edadToString = Integer.toString(edad);
 
-        if (!nombre.isEmpty() && !apellido1.isEmpty() && !apellido2.isEmpty() && !edadToString.isEmpty()) //CONTROL DE DATOS INTRODUCIDOS Y VACÍOS
+        if (!nombre.isEmpty() && !apellido1.isEmpty() && !apellido2.isEmpty() && !edadToString.isEmpty()) //CONTROL DE DATOS INTRODUCIDOS Y VACIOS
         {
             do {
                 persona = utilities.makeQuestion("Usuario (U) o Bibliotecario (B)").toUpperCase();

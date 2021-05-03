@@ -13,17 +13,15 @@ import static java.lang.Integer.parseInt;
  * @version 1.0
  * Clase Libro contiene los atributos principales del libro y metodos de control de estos.
  */
-public class Libro {
 
-    /**
-     * Aqui se guardan los atributos ISBN, titulo, autor, editorial, numero de copias y el numero de copias disponibles.
-     */
+
+public class Libro {
     private String isbn;
     private String titulo;
     private String autor;
     private String editorial;
     private int numCopias;
-    private static int numCopiasDisponibles;
+    private int numCopiasDisponibles;
     private static int numLibros;
 
     /**
@@ -162,12 +160,13 @@ public class Libro {
      * @param editorial
      * @param numCopias
      */
-    public Libro(String isbn, String titulo, String autor, String editorial, int numCopias) {
+    public Libro(String isbn, String titulo, String autor, String editorial, int numCopias, int numCopiasDisponibles) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
         this.numCopias = numCopias;
+        this.numCopiasDisponibles=numCopiasDisponibles;
     }
 
     /**
@@ -181,9 +180,9 @@ public class Libro {
     }
 
     /**
-     * Añadir libro: Solicitará los datos para crear un libro y añadirá dicho libro a una lista de libros
+     * Add libro: Solicitara los datos para crear un libro y anyadira dicho libro a una lista de libros
      */
-    public void añadirLibro() {
+    public void addLibro() {
         //INSTANCIAMOS
 
         Biblioteca biblioteca = new Biblioteca();
@@ -224,12 +223,9 @@ public class Libro {
             if (numCopias == 0) {
                 numCopias = 1;
             }
-            //número de copias disponibles
-            setNumCopiasDisponibles(numCopias);
-            //int numCopiasDispo = parseInt(utilities.makeQuestion("Introduce el número de copias disponibles del libro: "));
-
+            int numCopiasDisponibles=numCopias;
             //AÑADIMOS EL LIBRO
-            Libro libro = new Libro(isbn, title, author, editorial, numCopias); //libro formato objeto
+            Libro libro = new Libro(isbn, title, author, editorial, numCopias,numCopiasDisponibles); //libro formato objeto
             biblioteca.getLibros().add(libro); //añadimos el libro en la lista
             setNumLibros(getNumLibros() + 1); //sumamos uno a la cantidad de libros que hay
 
@@ -239,8 +235,8 @@ public class Libro {
     }
 
     /**
-     * Eliminar libro: Solicitará al usuario un ISBN, lo buscará y lo eliminará de la lista.
-     *     No se puede eliminar un libro que tiene reservas
+     * Eliminar libro: Solicitara al usuario un ISBN, lo buscara y lo eliminara de la lista.
+     *     No se puede eliminar un libro que tiene reservas.
      */
     public void eliminarLibro() {
         //INSTANCIAMOS
@@ -278,8 +274,8 @@ public class Libro {
     }
 
     /**
-     * Buscar libro por ISBN: Pedirá al usuario un ISBN, lo buscará en la lista.
-     * En caso de encontrarlo devolverá la posición en la que se encuentra, en caso contrario devolverá un mensaje de error.*/
+     * Buscar libro por ISBN: Pedira al usuario un ISBN, lo buscara en la lista.
+     * En caso de encontrarlo devolvera la posición en la que se encuentra, en caso contrario devolvera un mensaje de error.*/
     public void buscarIsbn() {
         //INSTANCIAMOS
         Biblioteca biblioteca = new Biblioteca();
@@ -322,19 +318,19 @@ public class Libro {
 
 
     /**
-     * Buscar libro por título: Pedirá al usuario un título, lo buscará en la lista.
-     * Mostrará cualquier libro que contenga la cadena buscada.
+     * Buscar libro por titulo: Pedira al usuario un titulo, lo buscara en la lista.
+     * Mostrara cualquier libro que contenga la cadena buscada.
      */
     public void buscarTitulo() {
         //INSTANCIAMOS
         Biblioteca biblioteca = new Biblioteca();
         Utilities utilities = new Utilities();
 
-        //PEDIMOS EL TÍTULO
+        //PEDIMOS EL TITULO
         String title = utilities.makeQuestion("Introduce el titulo del libro que estas buscando ");
         for (int i = 0; i < Biblioteca.getLibros().size(); i++) { //recorremos los libros
 
-            //COMPROBAMOS QUE HAYA ALGÚN LIBRO COINCIDENTE CON EL TÍTULO INTRODUCIDO
+            //COMPROBAMOS QUE HAYA ALGUN LIBRO COINCIDENTE CON EL TITULO INTRODUCIDO
             if (title.equals(biblioteca.getLibros().get(i).getTitulo())) {
                 System.out.println(biblioteca.getLibros().get(i));
                 break;

@@ -10,9 +10,6 @@ import static java.lang.Integer.parseInt;
  * Clase Usuario que extiende de la clase abstracta Persona: crea usuarios con atributos especificos y los adhiere a la lista Personas.
  */
 public class Usuario extends Persona {
-    /**
-     * Atributos telefono, direccion, codigo postal, correo electronico; y las listas de reservas y usuarios.
-     */
     private int telefono;
     private String direccion;
     private int codigoPostal;
@@ -144,7 +141,7 @@ public class Usuario extends Persona {
     //MÉTODOS
 
     /**
-     * Pasamos los atributos comunes de la super clase Persona; ademas, se añaden atributos propios del usuario.
+     * Pasamos los atributos comunes de la super clase Persona mas los atributos propios del usuario.
      * @param nombre
      * @param apellido1
      * @param apellido2
@@ -157,21 +154,21 @@ public class Usuario extends Persona {
         Biblioteca biblioteca = new Biblioteca();
         Utilities utilities = new Utilities();
 
-        //SEGUIMOS SOLICITANDO MÁS DATOS
+        //SEGUIMOS SOLICITANDO MAS DATOS
         //Teléfono
         int telefono = parseInt(utilities.makeQuestion("Introduce tu teléfono"));
 
-        //CONTROL NÚMERO DE TELÉFONO
+        //CONTROL NUMERO DE TELEFONO
         while(control(telefono).length()!=9){
             System.out.println("Este número no existe. Vuelve a introducir tu número de teléfono!");
             telefono=parseInt(utilities.makeQuestion("Introduce tu número de teléfono"));
         }
 
-        //Dirección y código postal
+        //Direccion y codigo postal
         String direccion = utilities.makeQuestion("Introduce dirección");
         int codigoPostal = parseInt(utilities.makeQuestion("Introduce código postal"));
 
-        //CONTROL CÓDIGO POSTAL
+        //CONTROL CODIGO POSTAL
         while(control(codigoPostal).length()>5){
             System.out.println("El código postal introducido no existe. Vuelve a introducir su código postal!");
             codigoPostal=parseInt(utilities.makeQuestion("Introduce código postal"));
@@ -262,9 +259,9 @@ public class Usuario extends Persona {
     }
 
     /**
-     * cambiarContraseñaUsuario: permite que el usuario cambie de contraseña.
+     * cambiarContraseñaUsuario: permite que el usuario cambie de password.
      */
-    public void cambiarContraseñaUsuario() {
+    public void cambiarPasswordUsuario() {
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
         Usuario usuario = new Usuario();

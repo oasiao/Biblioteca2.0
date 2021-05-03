@@ -10,9 +10,6 @@ import java.util.List;
 
 public class Biblioteca {
 
-    /**
-     * Atributos que definen el nombre de biblioteca y las listas de libros, reservas de estos y personas.
-     */
     private String nombreBiblioteca;
     private static List<Libro> libros = new ArrayList<>();
     private static List<Persona> personas =new ArrayList<>();
@@ -116,11 +113,8 @@ public class Biblioteca {
             {
                 librosDisponibles+=getLibros().get(i).toString()+"\n";
             }
-            else
-            {
-                System.out.println("No hay ningún libro disponible.");
-            }
         }
+        //System.out.println("No hay ningún libro disponible.");
         return librosDisponibles;
     }
 
