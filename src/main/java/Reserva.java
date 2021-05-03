@@ -198,13 +198,11 @@ public class Reserva extends Libro {
                         }
                         break;
                     }
-
                 }
             }
             //CORREO ELECTRÓNICO Y TELÉFONO NO REGISTRADOS
             else {
                 System.out.println("El usuario introducido no existe.");
-                //TODO MENU: SI NO EXISTE EL USUARIO, PREGUNTAR QUE QUIERE HACER
             }
         }
     }
