@@ -6,7 +6,7 @@ public class BibliotecaTests {
     Libro libro = new Libro();
     @Test
     public void mostrarLibrosDisp(){
-        Biblioteca.getLibros().add(new Libro("123456789","EL QUIJOTE","ANONIMO","DEBOLSILLO",1,1));
+        Biblioteca.getLibros().add(new Libro("123456789","EL QUIJOTE","ANONIMO","DEBOLSILLO",1));
         biblioteca.mostrarLibrosDisponibles();
         Assertions.assertEquals(1,Biblioteca.getLibros().size());
     }

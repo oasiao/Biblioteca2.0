@@ -75,6 +75,10 @@ public class Biblioteca {
             {
                 librosDisponibles+=getLibros().get(i).toString()+"\n";
             }
+            else
+            {
+                System.out.println("No hay ningún libro disponible.");
+            }
         }
         return librosDisponibles;
     }

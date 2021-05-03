@@ -27,7 +27,7 @@ public class Libro {
     private String autor;
     private String editorial;
     private int numCopias;
-    private int numCopiasDisponibles;
+    private static int numCopiasDisponibles;
 
     public static int getNumLibros() {
         return numLibros;
@@ -84,8 +84,8 @@ public class Libro {
         return numCopiasDisponibles;
     }
 
-    public void setNumCopiasDisponibles(int numCopiasDisponibles) {
-        this.numCopiasDisponibles = numCopiasDisponibles;
+    public void setNumCopiasDisponibles(int numCopias) {
+        this.numCopiasDisponibles = numCopias;
     }
 
     /**
@@ -100,15 +100,13 @@ public class Libro {
      * @param autor
      * @param editorial
      * @param numCopias
-     * @param numCopiasDisponibles Constructor con todos los parametros
      */
-    public Libro(String isbn, String titulo, String autor, String editorial, int numCopias, int numCopiasDisponibles) {
+    public Libro(String isbn, String titulo, String autor, String editorial, int numCopias) {
         this.isbn = isbn;
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
         this.numCopias = numCopias;
-        this.numCopiasDisponibles = numCopiasDisponibles;
     }
 
     @Override
@@ -159,10 +157,11 @@ public class Libro {
                 numCopias = 1;
             }
             //número de copias disponibles
-            int numCopiasDispo = parseInt(utilities.makeQuestion("Introduce el número de copias disponibles del libro: "));
+            setNumCopiasDisponibles(numCopias);
+            //int numCopiasDispo = parseInt(utilities.makeQuestion("Introduce el número de copias disponibles del libro: "));
 
             //AÑADIMOS EL LIBRO
-            Libro libro = new Libro(isbn, title, author, editorial, numCopias, numCopiasDispo); //libro formato objeto
+            Libro libro = new Libro(isbn, title, author, editorial, numCopias); //libro formato objeto
             biblioteca.getLibros().add(libro); //añadimos el libro en la lista
             setNumLibros(getNumLibros() + 1); //sumamos uno a la cantidad de libros que hay
 

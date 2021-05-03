@@ -16,8 +16,8 @@ public class Reserva extends Libro{
     public  Reserva(){}
 
     //constructor con parámetros
-    public Reserva(String isbn, String titulo, String autor,String editorial,int numCopias,int numCopiasDisponibles,Usuario usuario,String fechaYHora) {
-        super(isbn,titulo,autor,editorial,numCopias,numCopiasDisponibles); //extiende de Libro
+    public Reserva(String isbn, String titulo, String autor,String editorial,int numCopias,Usuario usuario,String fechaYHora) {
+        super(isbn,titulo,autor,editorial,numCopias); //extiende de Libro
         this.usuario=usuario;
         this.fechaYHora = fechaYHora;
     }
@@ -99,7 +99,6 @@ public class Reserva extends Libro{
                                     Biblioteca.getLibros().get(j).getTitulo(), Biblioteca.getLibros().get(j).getAutor(),
                                     Biblioteca.getLibros().get(j).getEditorial(),
                                     Biblioteca.getLibros().get(j).getNumCopias(),
-                                    Biblioteca.getLibros().get(j).getNumCopiasDisponibles(),
                                     usuario.getListaUsuarios().get(i),
                                     getFechaYHora()));
 
