@@ -419,7 +419,6 @@ public class Bibliotecario extends Persona {
                         System.out.println("Introduce una contraseña más segura que tenga mínimo 8 carácteres y contenga números, mayúsculas y minúsculas");
                         contraseñaNueva = utilities.makeQuestion("Introduce una contraseña");
                     }
-
                     getListaBibliotecarios().get(i).setContraseña(contraseñaNueva);
                     System.out.println("\n----------------CONTRASEÑA CAMBIADA----------------\n");
                 }
@@ -428,10 +427,8 @@ public class Bibliotecario extends Persona {
                     System.out.println("ERROR. Usuario incorrecto.\n");
                 }
             }
-            else
-            {
                 System.out.println("ERROR. Usuario incorrecto.\n");
-            }
+
         }
     }
 
