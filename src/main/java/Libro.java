@@ -134,6 +134,7 @@ public class Libro {
                 if (answer.equals("1")) {
                     int numCopiasDisponibles = parseInt(utilities.makeQuestion("Cuántas copias quieres añadir?"));
                     Biblioteca.getLibros().get(i).setNumCopiasDisponibles(Biblioteca.getLibros().get(i).getNumCopiasDisponibles() + numCopiasDisponibles);
+                    Biblioteca.getLibros().get(i).setNumCopias(Biblioteca.getLibros().get(i).getNumCopias() + numCopiasDisponibles);
                     System.out.println("\n -------------------------Copias añadidas-------------------------\n");
                 } else {
                     break;
