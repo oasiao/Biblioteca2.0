@@ -3,21 +3,43 @@ import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * @author Kim Asiao
+ * @author Santiago Martinez
+ * @version 1.0
+ * Clase Usuario que extiende de la clase abstracta Persona: crea usuarios con atributos especificos y los adhiere a la lista Personas.
+ */
 public class Usuario extends Persona {
+    /**
+     * Atributos telefono, direccion, codigo postal, correo electronico; y las listas de reservas y usuarios.
+     */
     private int telefono;
     private String direccion;
     private int codigoPostal;
     private String correoElectronico;
-    private List<Reserva> listaReservas = new ArrayList<>();
+    private static List<Reserva> listaReservas = new ArrayList<>();
 
     //Necesitamos una lista de usuarios
     private static List<Usuario> listaUsuarios = new ArrayList<>();
 
-    //constructor vacío
+    /**
+     * Constructor vacio.
+     */
     public Usuario() {
     }
 
-    //constructor con todos los parámetros
+    /**
+     * Constructor en los que se pasan los siguientes parametros (incluyendo aquellos que se encuentran en la super clase).
+     * @param nombre
+     * @param apellido1
+     * @param apellido2
+     * @param edad
+     * @param type
+     * @param telefono
+     * @param direccion
+     * @param codigoPostal
+     * @param correoElectronico
+     */
     public Usuario(String nombre, String apellido1, String apellido2, int edad, String type, int telefono, String direccion, int codigoPostal, String correoElectronico) {
         super(nombre, apellido1, apellido2, edad, type);
         this.telefono = telefono;
@@ -26,7 +48,10 @@ public class Usuario extends Persona {
         this.correoElectronico = correoElectronico;
     }
 
-    //TODO constructor copia
+    /**
+     *
+     * @return devuelve la lista de usuarios con el siguiente formato.
+     */
 
     public String toString() {
         return "------------------------\n"
@@ -43,6 +68,11 @@ public class Usuario extends Persona {
     }
 
     //GETTERS AND SETTERS
+
+    /**
+     *
+     * @return obtiene el telefono del usuario.
+     */
     public int getTelefono() {
         return telefono;
     }
@@ -67,13 +97,28 @@ public class Usuario extends Persona {
         this.codigoPostal = codigoPostal;
     }
 
+    /**
+     *
+     * @return obtiene el email del usuario.
+     */
     public String getCorreoElectronico() {
         return correoElectronico;
     }
 
+    /**
+     *
+     * @param correoElectronico establece el email al usuario.
+     */
+
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
+
+    /**
+     *
+     * @return  obtiene la lista Reservas.
+     */
+
 
     public List<Reserva> getListaReservas() {
         return listaReservas;
@@ -82,6 +127,11 @@ public class Usuario extends Persona {
     public void setListaReservas(List<Reserva> listaReservas) {
         this.listaReservas = listaReservas;
     }
+
+    /**
+     *
+     * @return obtiene lista de usuarios.
+     */
 
     public static List<Usuario> getListaUsuarios() {
         return listaUsuarios;
@@ -92,6 +142,15 @@ public class Usuario extends Persona {
     }
 
     //MÉTODOS
+
+    /**
+     * Pasamos los atributos comunes de la super clase Persona; ademas, se añaden atributos propios del usuario.
+     * @param nombre
+     * @param apellido1
+     * @param apellido2
+     * @param edad
+     * @param type
+     */
     public void solicitarDatosUsuario(String nombre, String apellido1, String apellido2, int edad, String type) {
         //INSTANCIAMOS
         Bibliotecario bibliotecario = new Bibliotecario();
@@ -144,7 +203,6 @@ public class Usuario extends Persona {
 
             System.out.println("\n-----------------¡Usuario registrado!--------------------\n");
 
-            //TODO MENU: esto lo añadiría en el MENU
             //si el bibliotecario inicia sesión, entonces, podrá realizar operaciones en la biblioteca
             if (Bibliotecario.getLogin() == true) {
                 App.menuBibliotecario();
@@ -155,12 +213,13 @@ public class Usuario extends Persona {
             //si no cumple el CONTROL DE DATOS, entonces mostrará el mensaje: ERROR!
         } else {
             System.out.println("ERROR. Vuelve a introducir los datos");
-
-            //TODO menu: preguntar si quiee volver a intentarlo o no.
             solicitarDatosUsuario(nombre, apellido1, apellido2, edad, type);
         }
     }
 
+    /**
+     * logInUsuario: control de inicio de sesion del usuario, en el que se piden el telefono y el email.
+     */
     public void logInUsuario() {
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
@@ -202,6 +261,9 @@ public class Usuario extends Persona {
         bibliotecario.logInOrRegister();
     }
 
+    /**
+     * cambiarContraseñaUsuario: permite que el usuario cambie de contraseña.
+     */
     public void cambiarContraseñaUsuario() {
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
@@ -245,6 +307,10 @@ public class Usuario extends Persona {
         }
     }
 
+    /**
+     *
+     * @return muestra la lista de Usuarios con el formato especificado en el metodo toString().
+     */
     public String mostrarUsuarios() {
         String usuarios = "";
         for (int i = 0; i < getListaUsuarios().size(); i++) {
@@ -253,7 +319,11 @@ public class Usuario extends Persona {
         return usuarios;
     }
 
-    //creamos este método para poder hacer un control de los datos que introducimos
+    /**
+     * Creamos este metodo para poder hacer un control de los datos que introducimos
+     * @param var ha de ser un numero.
+     * @return convertira el numero en string y lo devolvera.
+     */
     public String control(int var){
         String control=Integer.toString(var);
         return control;

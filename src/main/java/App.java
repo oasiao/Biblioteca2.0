@@ -3,14 +3,19 @@ import java.util.Scanner;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * @author Kim Asiao
+ * @author Santiago Martinez
+ * @version 1.0
+ * Clase App: ejecutor de la aplicacion, con un menu para el bibliotecario y otro para el usuario. Ademas, crea un
+ * usuario root (bibliotecario), por defecto.
+ */
+
 public class App {
 
     public static void main(String[] args) {
         Bibliotecario bibliotecario = new Bibliotecario();
         Utilities utilities = new Utilities();
-        /*Crea un menú (con switch), que permita gestionar la biblioteca dando soporte a todos los métodos
-        que se han solicitado anteriormente. Puede ser interesante que haya varios menús, uno para gestionar
-        el personal de la biblioteca y otro para gestionar las reservas.*/
 
         //añadimos un usuario por defecto que será el administrador del sistema
         Biblioteca.getPersonas().add(new Bibliotecario("root", "root", "root", 0, "BIBLIOTECARIO",
@@ -24,6 +29,9 @@ public class App {
 
     }
 
+    /**
+     * menuBibliotecario: menu de gestion de personal, libros y reservas por parte del bibliotecario.
+     */
     public static void menuBibliotecario() {
         /**
          * Instanciamos las clases necesarias para importar funciones
@@ -232,6 +240,9 @@ public class App {
         }
     }
 
+    /**
+     * menuUsuario: permite buscar libros, cambiar el correo electronico suyo y cerrar sesion.
+     */
     public static void menuUsuario() {
 
         //INSTANCIAMOS

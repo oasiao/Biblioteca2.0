@@ -5,23 +5,50 @@ import java.util.Date;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * @author Kim Asiao
+ * @author Santiago Martinez
+ * @version 1.0
+ * Clase Reserva que extiende de la clase Libro: gestiona las reservas hechas por el bibliotecario.
+ */
+
 public class Reserva extends Libro{
-    //se caracteriza por tener un libro, por eso hago un extends pero no sé si ist gut
+    /**
+     *  Los atributos almacenan la fecha y la hora de la reserva
+     */
+
     private String fechaYHora;
 
     //añadimos el usuario para poder pasarlo por parámetro al constructor
     private Usuario usuario;
 
-    //constructor vacío
+    /**
+     * Constructor vacio
+     */
     public  Reserva(){}
 
-    //constructor con parámetros
+
+
+    /**
+     * Atributos como parametros en el constructor reserva
+     * @param isbn
+     * @param titulo
+     * @param autor
+     * @param editorial
+     * @param numCopias
+     * @param usuario
+     * @param fechaYHora
+     */
     public Reserva(String isbn, String titulo, String autor,String editorial,int numCopias,Usuario usuario,String fechaYHora) {
         super(isbn,titulo,autor,editorial,numCopias); //extiende de Libro
         this.usuario=usuario;
         this.fechaYHora = fechaYHora;
     }
 
+    /**
+     *
+     * @return devuelve la lista de libros reservados con la fecha y la hora y el usuario.
+     */
     @Override
     public String toString() {
         return "------------------------------------------------\nReserva:\n" +
@@ -29,8 +56,10 @@ public class Reserva extends Libro{
                 "Fecha y hora:" + fechaYHora + "\n------------------------------------------------\n";
     }
 
-    //TODO : ES UN ADD
-    //CREAMOS UN MÉTODO QUE MUESTRE TODAS LAS RESERVAS QUE HAY
+    /**
+     *
+     * @return devuelve todas las reservas.
+     */
     public String mostrarReservas(){
         //La lista de reservas se encuentra en usuario porque así especifica el enunciado
         Usuario usuario = new Usuario();
@@ -41,19 +70,30 @@ public class Reserva extends Libro{
         return reservas;
     }
 
-    //TODO CONSTRUCTOR COPIA
-
     //GETTERS AND SETTERS
+
+    /**
+     *
+     * @return devuelve la fecha y la hora de la reserva.
+     */
     public String getFechaYHora() {
         String timeStamp = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(Calendar.getInstance().getTime());
         return timeStamp;
     }
 
+    /**
+     *
+     * @param fechaYHora establece fecha y hora.
+     */
     public void setFechaYHora(String fechaYHora) {
         this.fechaYHora = fechaYHora;
     }
 
     //MÉTODOS
+
+    /**
+     * Reservar libro: se introducen el telefono y el email del usuario para poder reservar un libro.
+     */
     public void reservarLibro() {
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
@@ -129,6 +169,10 @@ public class Reserva extends Libro{
             }
         }
     }
+
+    /**
+     * Devolver libro: se introduce el telefono y el email del usuario, y se añade +1 a libros disponibles.
+     */
 
     public void devolverLibro(){
         //INSTANCIAMOS

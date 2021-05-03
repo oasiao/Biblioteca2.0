@@ -4,7 +4,19 @@ import java.util.Locale;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * @author Kim Asiao
+ * @author Santiago Martinez
+ * @version 1.0
+ * Clase Bibliotecario extiende de Persona: almacena la logica de la aplicacion del usuario Bibliotecario.
+ */
+
+
 public class Bibliotecario extends Persona {
+    /**
+     * Atributos especificos de bibliotecario: puesto de trabajo, nif y contrasenya; almacena lista de bibliotecarios,
+     * control del login y validacion del password.
+     */
     private String puestoTrabajo;
     private String NIF;
     private String contraseña;
@@ -18,11 +30,25 @@ public class Bibliotecario extends Persona {
     //CREAMOS una var para la contraseña
     private static boolean passwordValida = false;
 
-    //constructor vacio
+    /**
+     *
+     * Constructor vacio.
+     */
+
     public Bibliotecario() {
     }
 
-    //constructor parametros
+    /**
+     * Contructor con los parametros de la super clase Persona y los propios del Bibliotecario.
+     * @param nombre
+     * @param apellido1
+     * @param apellido2
+     * @param edad
+     * @param type
+     * @param puestoTrabajo
+     * @param NIF
+     * @param contraseña
+     */
     public Bibliotecario(String nombre, String apellido1, String apellido2, int edad, String type, String puestoTrabajo, String NIF, String contraseña) {
         super(nombre, apellido1, apellido2, edad, type);
         this.puestoTrabajo = puestoTrabajo;
@@ -30,6 +56,10 @@ public class Bibliotecario extends Persona {
         this.contraseña = contraseña;
     }
 
+    /**
+     *
+     * @return devuelve el bibliotecario con el siguiente formato.
+     */
     @Override
     public String toString() {
         return "------------------------\n"
@@ -40,8 +70,6 @@ public class Bibliotecario extends Persona {
                 + "\n-------------------------\n";
     }
 
-    //TODO CONSTRUCTOR COPIA
-
     //GETTERS AND SETTERS
     public String getPuestoTrabajo() {
         return puestoTrabajo;
@@ -51,6 +79,10 @@ public class Bibliotecario extends Persona {
         this.puestoTrabajo = puestoTrabajo;
     }
 
+    /**
+     *
+     * @return devuelve el nif del bibliotecario.
+     */
     public String getNIF() {
         return NIF;
     }
@@ -59,13 +91,27 @@ public class Bibliotecario extends Persona {
         this.NIF = NIF;
     }
 
+    /**
+     *
+     * @return devuelve la contraseña de bibliotecario.
+     */
     public String getContraseña() {
         return contraseña;
     }
 
+    /**
+     *
+     * @param contraseña establece la contraseña de bibliotecario.
+     */
+
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+
+    /**
+     *
+     * @return devuelve la lista de bibliotecarios.
+     */
 
     public static List<Bibliotecario> getListaBibliotecarios() {
         return listaBibliotecarios;
@@ -75,10 +121,18 @@ public class Bibliotecario extends Persona {
         this.listaBibliotecarios = listaBibliotecarios;
     }
 
+    /**
+     *
+     * @return devuelve el estado del login.
+     */
     public static boolean getLogin() {
         return login;
     }
 
+    /**
+     *
+     * @param login establece el estado del login.
+     */
     public static void setLogin(boolean login) {
         boolean loginDefecto = false;
         Bibliotecario.login = loginDefecto;
@@ -89,6 +143,11 @@ public class Bibliotecario extends Persona {
         }
     }
 
+    /**
+     *
+     * @param password le pasamos por parametro una contraseña y la valida
+     * @return devuelve la validacion de la contraseña.
+     */
     public static boolean isPasswordValida(String password) {
         boolean mayus = false;
         boolean num = false;
@@ -108,12 +167,25 @@ public class Bibliotecario extends Persona {
         return passwordValida;
     }
 
+    /**
+     *
+     * @param passwordValida establece el estado de la contraseña.
+     */
     public static void setPasswordValida(boolean passwordValida) {
         Bibliotecario.passwordValida = passwordValida;
     }
 
 
     //MÉTODOS
+
+    /**
+     * solicitarDatosBibliotecario: pasa los datos de la super clase y pregunta los datos propios del bibliotecario.
+     * @param nombre
+     * @param apellido1
+     * @param apellido2
+     * @param edad
+     * @param type
+     */
     public void solicitarDatosBibliotecario(String nombre, String apellido1, String apellido2, int edad, String type) {
         //INSTANCIAMOS
         Biblioteca biblioteca = new Biblioteca();
@@ -165,6 +237,11 @@ public class Bibliotecario extends Persona {
         }
     }
 
+    /**
+     * logInOrRegister: es un menu en el que se permite registrar una persona, que este inicie sesion o bien salir
+     * del programa.
+     *
+     */
     public void logInOrRegister() {
         //INSTANCIAMOS
         Utilities utilities = new Utilities();
@@ -219,6 +296,9 @@ public class Bibliotecario extends Persona {
         }
     }
 
+    /**
+     * logInBibliotecario: control de inicio sesion para el bibliotecario, introduciendo el nif y la contraseña.
+     */
     public void logInBibliotecario() {
         Utilities utilities = new Utilities();
         String NIF = utilities.makeQuestion("Introduce usuario (NIF)").toUpperCase();
@@ -251,40 +331,24 @@ public class Bibliotecario extends Persona {
         logInOrRegister();
     }
 
+    /**
+     * logOut: establece el cierre de sesion.
+     */
     public void logOut() {
         setLogin(false);
         logInOrRegister();
     }
 
-
+    /**
+     * añadirPersonal: invoca al metodo solicitarDatosPersona() y crea nuevas personas.
+     */
     public void añadirPersonal() {
         super.solicitarDatosPersona();
     }
 
-   /* public void eliminarPersonal() {
-        Utilities utilities = new Utilities();
-        String opcion = utilities.makeQuestion("Introduce el NIF");
-
-        for (int i = 0; i < Biblioteca.getPersonas().size(); i++) {
-            if (Biblioteca.getPersonas().get(i).toString().contains(opcion)) {
-                Biblioteca.getPersonas().remove(i);
-
-                //LO BORRAMOS EN LA LISTA CREADA SOLO PARA BIBLIOTECARIOS
-                for (int j = 0; j < getListaBibliotecarios().size(); j++) {
-                    f(getListaBibliotecarios().get(j).getNIF().equals(opcion)){
-                        getListaBibliotecarios().remove(j);
-                    }
-                }
-                System.out.println("-------------------ELIMINADO CON ÉXITO------------------");
-                break;
-            } else {
-                if(i==Biblioteca.getPersonas().size()-1 &&!Biblioteca.getPersonas().get(i).toString().contains(opcion)) {
-                    System.out.println("El elemento no existe");
-                }
-            }
-        }
-    }*/
-
+    /**
+     * eliminarPersonal: permite, mediante la introduccion del nif, borrar a la persona con los datos coincidentes.
+     */
     public void eliminarPersonal() {
         Utilities utilities = new Utilities();
         String opcion = utilities.makeQuestion("Introduce el NIF").toUpperCase();
@@ -306,7 +370,10 @@ public class Bibliotecario extends Persona {
         }
     }
 
-    //TODO si cambia en la lista de Bibliotecarios, también cambia en la lista de personas
+    /**
+     * cambiarContraseñaBibliotecario: permite cambiar la contraseña del bibliotecario, pero jamas del
+     * usuario root (administrador).
+     */
 
     public void cambiarContraseñaBibliotecario() {
         //INSTANCIAMOS
@@ -368,6 +435,10 @@ public class Bibliotecario extends Persona {
         }
     }
 
+    /**
+     *
+     * @return muestra la lista de bibliotecarios con el formato toString().
+     */
     public String mostrarBibliotecarios() {
         String personal = "";
         for (int i = 0; i < getListaBibliotecarios().size(); i++) {

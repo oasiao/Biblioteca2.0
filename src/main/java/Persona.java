@@ -4,6 +4,12 @@ import java.util.Date;
 import static java.lang.Integer.getInteger;
 import static java.lang.Integer.parseInt;
 
+/**
+ * @author Kim Asiao
+ * @author Santiago Martinez
+ * @version 1.0
+ * Clase abstracta Persona: es la super clase de la cual extienden los usuarios y bibliotecarios.
+ */
 public abstract class Persona {
     private String nombre;
     private String apellido1;
@@ -11,10 +17,19 @@ public abstract class Persona {
     private int edad;
     private String type;
 
-    //constructor vacío
+    /**
+     * Constructor vacío.
+     */
     public Persona(){}
 
-    //constructor con parametros
+    /**
+     * Constructor con los atributos como parametros.
+     * @param nombre
+     * @param apellido1
+     * @param apellido2
+     * @param edad
+     * @param type
+     */
     public Persona(String nombre, String apellido1, String apellido2, int edad,String type) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
@@ -23,10 +38,10 @@ public abstract class Persona {
         this.type=type;
     }
 
-    //TODO CONSTRUCTOR COPIA
-    //TODO TOSTRING PERSONA
-
-
+    /**
+     *
+     * @return devuelve el nombre de la persona.
+     */
     public String getNombre() {
         return nombre;
     }
@@ -35,6 +50,10 @@ public abstract class Persona {
         this.nombre = nombre;
     }
 
+    /**
+     *
+     * @return devuelve el primer apellido de la persona.
+     */
     public String getApellido1() {
         return apellido1;
     }
@@ -43,6 +62,10 @@ public abstract class Persona {
         this.apellido1 = apellido1;
     }
 
+    /**
+     *
+     * @return devuelve el segundo apellido de la persona.
+     */
     public String getApellido2() {
         return apellido2;
     }
@@ -51,6 +74,10 @@ public abstract class Persona {
         this.apellido2 = apellido2;
     }
 
+    /**
+     *
+     * @return devuelve la edad de la persona.
+     */
     public int getEdad() {
         return edad;
     }
@@ -58,6 +85,11 @@ public abstract class Persona {
     public void setEdad(int edad) {
         this.edad = edad;
     }
+
+    /**
+     *
+     * @return devuelve el tipo de persona.
+     */
 
     public String getType() {
         return type;
@@ -68,6 +100,11 @@ public abstract class Persona {
     }
 
     //MÉTODOS
+
+    /**
+     * solicitarDatosPersona: inicia la creacion de personas, la cual sera diferente dependiendo del
+     * tipo de persona (usuario o bibliotecario).
+     */
     public void solicitarDatosPersona(){
         //INSTANCIAMOS LAS CLASES NECESARIAS
         Utilities utilities = new Utilities();

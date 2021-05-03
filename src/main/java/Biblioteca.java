@@ -1,8 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Kim Asiao
+ * @author Santiago Martinez
+ * @version 1.0
+ * Clase Biblioteca: se almacenan las listas libros, libros reservados y personas.
+ */
+
 public class Biblioteca {
 
+    /**
+     * Atributos que definen el nombre de biblioteca y las listas de libros, reservas de estos y personas.
+     */
     private String nombreBiblioteca;
     private static List<Libro> libros = new ArrayList<>();
     private static List<Persona> personas =new ArrayList<>();
@@ -10,17 +20,27 @@ public class Biblioteca {
     //creamos una lista de libros reservados
     private static List<Libro> librosReservados=new ArrayList<>();
 
-    //constructor vacio
+    /**
+     * Constructor vacio.
+     */
     public Biblioteca(){}
 
-    //constructor con parametros
+    /**
+     * Constructor con el parametro del nombre de la biblioteca.
+     * @param nombreBiblioteca
+     */
     public Biblioteca(String nombreBiblioteca) {
         this.nombreBiblioteca = nombreBiblioteca;
     }
 
-    //TODO CONSTRUCTOR COPIA
+
 
     //GETTERS AND SETTERS
+
+    /**
+     *
+     * @return devuelve el nombre de la biblioteca.
+     */
     public String getNombreBiblioteca() {
         return nombreBiblioteca;
     }
@@ -32,6 +52,10 @@ public class Biblioteca {
         this.nombreBiblioteca = nombreBiblioteca;
     }
 
+    /**
+     *
+     * @return devuelve la lista de libros.
+     */
     public static List<Libro> getLibros() {
         return libros;
     }
@@ -40,6 +64,10 @@ public class Biblioteca {
         Biblioteca.libros = libros;
     }
 
+    /**
+     *
+     * @return devuelve la lista de personas.
+     */
     public static List<Persona> getPersonas() {
         return personas;
     }
@@ -48,6 +76,10 @@ public class Biblioteca {
         Biblioteca.personas = personal;
     }
 
+    /**
+     *
+     * @return devuelve lista de libros reservados.
+     */
     public static List<Libro> getLibrosReservados() {
         return librosReservados;
     }
@@ -58,7 +90,11 @@ public class Biblioteca {
 
 
     //MÉTODOS
-    /*Mostrar libros: Imprimirá por pantalla toda la lista de libros. (método instancia)*/
+    /**
+     *
+     * Mostrar libros: Imprimira por pantalla toda la lista de libros.
+     */
+
     public String mostrarLibros(){
         Libro libro = new Libro();
         String libros="";
@@ -67,6 +103,11 @@ public class Biblioteca {
         }
         return libros;
     }
+
+    /**
+     *
+     * @return devuelve la lista de libros disponibles para reservar, con el formato especificado en el metodo toString().
+     */
 
     public String mostrarLibrosDisponibles(){
         String librosDisponibles="";
@@ -83,6 +124,10 @@ public class Biblioteca {
         return librosDisponibles;
     }
 
+    /**
+     *
+     * @return devuelve la lista de personas con el formato del toString().
+     */
     public String mostrarPersonas(){
         String personas="";
         for (int i = 0; i < getPersonas().size(); i++) {
@@ -92,7 +137,10 @@ public class Biblioteca {
     }
 
 
-    //TO STRING BIBLIOTECA
+    /**
+     *
+     * @return devuelve el formato de visualizacion de una hipotetica lista de biblioteca.
+     */
     @Override
     public String toString() {
         return "Biblioteca: "+getNombreBiblioteca()+
