@@ -91,32 +91,30 @@ public class Libro {
     /**
      * Constructor vacio
      */
-    public Libro(){}
+    public Libro() {
+    }
 
     /**
-     *
      * @param isbn
      * @param titulo
      * @param autor
      * @param editorial
      * @param numCopias
-     * @param numCopiasDisponibles
-     *
-     * Constructor con todos los parametros
+     * @param numCopiasDisponibles Constructor con todos los parametros
      */
-    public Libro(String isbn, String titulo, String autor,String editorial,int numCopias,int numCopiasDisponibles){
-        this.isbn=isbn;
-        this.titulo=titulo;
-        this.autor=autor;
-        this.editorial=editorial;
-        this.numCopias=numCopias;
-        this.numCopiasDisponibles=numCopiasDisponibles;
+    public Libro(String isbn, String titulo, String autor, String editorial, int numCopias, int numCopiasDisponibles) {
+        this.isbn = isbn;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.editorial = editorial;
+        this.numCopias = numCopias;
+        this.numCopiasDisponibles = numCopiasDisponibles;
     }
 
     @Override
     public String toString() {
-        return "-------------------------------------------\nISBN: "+getIsbn()+"\nTítulo: "+getTitulo()+"\nAutor: "+getAutor()+"\nEditorial: "+getEditorial()
-                +"\nNúmero de copias: "+getNumCopias()+"\nNúmero de copias disponibles: "+getNumCopiasDisponibles()+"\n-------------------------------------------";
+        return "-------------------------------------------\nISBN: " + getIsbn() + "\nTítulo: " + getTitulo() + "\nAutor: " + getAutor() + "\nEditorial: " + getEditorial()
+                + "\nNúmero de copias: " + getNumCopias() + "\nNúmero de copias disponibles: " + getNumCopiasDisponibles() + "\n-------------------------------------------";
     }
 
     //MÉTODOS
@@ -125,30 +123,26 @@ public class Libro {
         //INSTANCIAMOS
         Biblioteca biblioteca = new Biblioteca();
         Utilities utilities = new Utilities();
-        boolean libroRepetido=false;
+        boolean libroRepetido = false;
 
         //SOLICITAMOS LOS DATOS DEL LIBRO
         //isbn
-        String isbn=utilities.makeQuestion("Introduce el isbn del libro");
+        String isbn = utilities.makeQuestion("Introduce el isbn del libro");
         for (int i = 0; i < Biblioteca.getLibros().size(); i++) {
-            if(Biblioteca.getLibros().get(i).getIsbn().equals(isbn))
-            {
+            if (Biblioteca.getLibros().get(i).getIsbn().equals(isbn)) {
                 System.out.println("Este libro ya existe.");
-                libroRepetido=true;
-                String answer=utilities.makeQuestion("¿Quieres añadir libros disponibles a este libro? Sí (1), No (0)");
-                if(answer.equals("1"))
-                {
-                    int numCopiasDisponibles=parseInt(utilities.makeQuestion("Cuántas copias quieres añadir?"));
-                    Biblioteca.getLibros().get(i).setNumCopiasDisponibles(Biblioteca.getLibros().get(i).getNumCopiasDisponibles()+numCopiasDisponibles);
+                libroRepetido = true;
+                String answer = utilities.makeQuestion("¿Quieres añadir libros disponibles a este libro? Sí (1), No (0)");
+                if (answer.equals("1")) {
+                    int numCopiasDisponibles = parseInt(utilities.makeQuestion("Cuántas copias quieres añadir?"));
+                    Biblioteca.getLibros().get(i).setNumCopiasDisponibles(Biblioteca.getLibros().get(i).getNumCopiasDisponibles() + numCopiasDisponibles);
                     System.out.println("\n -------------------------Copias añadidas-------------------------\n");
-                }
-                else
-                {
+                } else {
                     break;
                 }
             }
         }
-        if(libroRepetido==false){
+        if (libroRepetido == false) {
             //titulo
             String title = utilities.makeQuestion("Introduce el titulo del libro: ");
 
@@ -165,12 +159,12 @@ public class Libro {
                 numCopias = 1;
             }
             //número de copias disponibles
-            int numCopiasDispo=parseInt(utilities.makeQuestion("Introduce el número de copias disponibles del libro: "));
+            int numCopiasDispo = parseInt(utilities.makeQuestion("Introduce el número de copias disponibles del libro: "));
 
             //AÑADIMOS EL LIBRO
             Libro libro = new Libro(isbn, title, author, editorial, numCopias, numCopiasDispo); //libro formato objeto
             biblioteca.getLibros().add(libro); //añadimos el libro en la lista
-            setNumLibros(getNumLibros()+1); //sumamos uno a la cantidad de libros que hay
+            setNumLibros(getNumLibros() + 1); //sumamos uno a la cantidad de libros que hay
 
             //MENSAJE DE SUCCESS
             System.out.println("¡El libro se ha introducido con éxito!");
@@ -180,65 +174,13 @@ public class Libro {
     /*- Eliminar libro: Solicitará al usuario un ISBN, lo buscará y lo eliminará de la lista
     No se puede eliminar un libro que tiene reservas.*/
 
-    public void eliminarLibro () {
+    public void eliminarLibro() {
         //INSTANCIAMOS
         Biblioteca biblioteca = new Biblioteca();
         Utilities utilities = new Utilities();
 
         //NECESITO UN BOOLEANO PARA RECORRER LAS 2 LISTAS
-        boolean reservado=false;
-
-        /*//PEDIMOS ISBN
-        String isbn = utilities.makeQuestion("Introduce el isbn del libro que quieres eliminar: ");
-
-        //RECORREMOS LA LISTA DE LIBROS
-        for (int i = 0; i < biblioteca.getLibros().size(); i++) {
-
-            //Buscamos un libro que coincida con el isbn introducido
-            if (isbn.equals(biblioteca.getLibros().get(i).getIsbn())) {
-
-                //si encontramos uno que coincida, entonces, comprobamos que no se encuentre en la lista de Reservas
-                for (int j = 0; j < Biblioteca.getLibrosReservados().size(); j++) {
-                    if (isbn.equals(biblioteca.getLibros().get(j).getIsbn())) {
-                        System.out.println("No podemos eliminar el libro porque un usuario lo tiene reservado.");
-                    }
-                    else
-                    {
-                        biblioteca.getLibros().remove(i);
-                    }
-                }
-            }
-        }*/
-
-
-        //vamos a hacerlo de otra manera, porque si no hay reservas, en el segundo for NO RECORRE porque SIZE == 0
-
-        /*//PEDIMOS ISBN
-        String isbn = utilities.makeQuestion("Introduce el isbn del libro que quieres eliminar: ");
-
-        //RECORREMOS LA LISTA DE LIBROS
-        for (int i = 0; i < biblioteca.getLibrosReservados().size(); i++) {
-
-            //Si el libro coincide con alguna reserva, entonces no lo eliminamos
-            if (!isbn.equals(biblioteca.getLibrosReservados().get(i).getIsbn())) {
-                for (int j = 0; j < Biblioteca.getLibros().size(); j++) {
-                    if (isbn.equals(biblioteca.getLibros().get(j).getIsbn())) {
-                        biblioteca.getLibros().remove(i);
-                    }
-                    else
-                    {
-                        System.out.println("El libro no está registrado en la biblioteca.");
-                    }
-                }
-            }
-
-            //si encontramos uno que coincida, entonces, comprobamos que no se encuentre en la lista de Reservas
-            else
-            {
-                System.out.println("No podemos eliminar el libro porque un usuario lo tiene reservado.");
-            }
-
-        }*/
+        boolean reservado = false;
 
         //PEDIMOS ISBN
         String isbn = utilities.makeQuestion("Introduce el isbn del libro que quieres eliminar: ");
@@ -248,34 +190,28 @@ public class Libro {
 
             //Si el libro coincide con alguna reserva, entonces no lo eliminamos
             if (isbn.equals(biblioteca.getLibrosReservados().get(i).getIsbn())) {
-                reservado=true;
+                reservado = true;
             }
-
         }
 
         for (int j = 0; j < Biblioteca.getLibros().size(); j++) {
             if (isbn.equals(biblioteca.getLibros().get(j).getIsbn())) {
-                if(reservado==true)
-                {
+                if (reservado == true) {
                     System.out.println("No podemos eliminar el libro porque un usuario lo tiene reservado.");
-                }
-                else
-                {
+                } else {
                     biblioteca.getLibros().remove(j);
                     System.out.println("-----------------Libro eliminado!-----------------");
                 }
-            }
-            else
-            {
-                if(j==Biblioteca.getLibros().size()-1 && !isbn.equals(biblioteca.getLibros().get(j).getIsbn()))
-                System.out.println("El libro no está registrado en la biblioteca.");
+            } else {
+                if (j == Biblioteca.getLibros().size() - 1 && !isbn.equals(biblioteca.getLibros().get(j).getIsbn()))
+                    System.out.println("El libro no está registrado en la biblioteca.");
             }
         }
     }
 
     /*- Buscar libro por ISBN: Pedirá al usuario un ISBN, lo buscará en la lista.
     En caso de encontrarlo devolverá la posición en la que se encuentra, en caso contrario devolverá -1.*/
-    public void buscarIsbn () {
+    public void buscarIsbn() {
         //INSTANCIAMOS
         Biblioteca biblioteca = new Biblioteca();
         Utilities utilities = new Utilities();
@@ -285,7 +221,7 @@ public class Libro {
         String answer;
 
         //RECORREMOS LA LISTA DE LIBROS
-        for (int i = 0; i < getNumLibros(); i++) { //recorremos los libros
+        for (int i = 0; i < Biblioteca.getLibros().size(); i++) { //recorremos los libros
 
             //Buscamos un libro que coincida con el isbn introducido
             if (isbn.equals(biblioteca.getLibros().get(i).getIsbn())) {
@@ -294,46 +230,54 @@ public class Libro {
                 answer = utilities.makeQuestion("El libro que estás buscando es " + biblioteca.getLibros().get(i).getTitulo() + "? Sí (1) o No (0)");
 
                 if (answer.equals("1")) {
-                    System.out.println("TU BUSQUEDA: \n"+biblioteca.getLibros().get(i)+"\ny se encuentra en la posición: "+i+" de la biblioteca");
+                    System.out.println("TU BUSQUEDA: \n" + biblioteca.getLibros().get(i) + "\ny se encuentra en la posición: " + i + " de la biblioteca");
                     break;
-                }
-                else
-                    {
+                } else {
                     System.out.println("Probablemente se haya equivocado escribiendo el ISBN. \n Vuelva a intentarlo.");
                     break;
                 }
             }
 
-            if (!isbn.equals(biblioteca.getLibros().get(i).getIsbn()) && i == getNumLibros() - 1) //si el libro es diferente al isbn y ya hemos llegado al último libro...
+            if (!isbn.equals(Biblioteca.getLibros().get(i).getIsbn()) && i == Biblioteca.getLibros().size()-1) //si el libro es diferente al isbn y ya hemos llegado al último libro...
             {
                 System.out.println("El libro que buscas no está registrado en nuestra biblioteca.");
             }
         }
+
+        if(Biblioteca.getLibros().size()==0)
+        {
+            System.out.println("No hay ningún libro registrado.");
+        }
     }
+
+
 
     /* Buscar libro por título: Pedirá al usuario un título, lo buscará en la lista.
     Mostrará cualquier libro que contenga la cadena buscada. */
-    public void buscarTitulo () {
+    public void buscarTitulo() {
         //INSTANCIAMOS
         Biblioteca biblioteca = new Biblioteca();
         Utilities utilities = new Utilities();
 
         //PEDIMOS EL TÍTULO
-        String title = utilities.makeQuestion("Introduce el titulo del libro que estas buscando: ");
-        for (int i = 0; i < getNumLibros(); i++) { //recorremos los libros
+        String title = utilities.makeQuestion("Introduce el titulo del libro que estas buscando ");
+        for (int i = 0; i < Biblioteca.getLibros().size(); i++) { //recorremos los libros
 
             //COMPROBAMOS QUE HAYA ALGÚN LIBRO COINCIDENTE CON EL TÍTULO INTRODUCIDO
             if (title.equals(biblioteca.getLibros().get(i).getTitulo())) {
                 System.out.println(biblioteca.getLibros().get(i));
                 break;
-            }
-            else
-            {
-                if (!title.equals(biblioteca.getLibros().get(i).getTitulo()) && i == getNumLibros() - 1) //si el libro es diferente al titulo y ya hemos llegado al último libro...
+            } else {
+                if (!title.equals(biblioteca.getLibros().get(i).getTitulo()) && i == Biblioteca.getLibros().size() - 1) //si el libro es diferente al titulo y ya hemos llegado al último libro...
                 {
                     System.out.println("No hay ningún libro registrado con este título: " + title);
                 }
             }
+        }
+
+        if(Biblioteca.getLibros().size()==0)
+        {
+            System.out.println("No hay ningún libro registrado.");
         }
     }
 
