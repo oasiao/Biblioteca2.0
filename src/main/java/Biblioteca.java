@@ -98,6 +98,12 @@ public class Biblioteca {
         for (int i = 0; i < getLibros().size(); i++) {
             libros+=getLibros().get(i).toString()+"\n";//este toString es de Libro, porque hacemos get(i) por tanto equivale a LIBRO
         }
+
+        if(getLibros().size()==0)
+        {
+            libros+="No hay ningun libro registrado.";
+        }
+
         return libros;
     }
 

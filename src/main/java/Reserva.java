@@ -62,6 +62,12 @@ public class Reserva extends Libro {
         for (int i = 0; i < usuario.getListaReservas().size(); i++) {
             reservas += usuario.getListaReservas().get(i).toString();
         }
+
+        if(usuario.getListaReservas().size()==0)
+        {
+            reservas="No hay ninguna reserva";
+        }
+
         return reservas;
     }
 

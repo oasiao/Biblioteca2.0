@@ -29,7 +29,7 @@ public class Libro {
      * @return devuelve el numero de libros que hay registrados.
      */
     public static int getNumLibros() {
-        return numLibros;
+        return Biblioteca.getLibros().size();
     }
 
     /**
@@ -337,14 +337,14 @@ public class Libro {
             } else {
                 if (!title.equals(biblioteca.getLibros().get(i).getTitulo()) && i == Biblioteca.getLibros().size() - 1) //si el libro es diferente al titulo y ya hemos llegado al último libro...
                 {
-                    System.out.println("----------------- No hay ningún libro registrado con este título: " + title + "-----------------");
+                    System.out.println("\n----------------- No hay ningún libro registrado con este título: " + title + "-----------------\n");
                 }
             }
         }
 
         if(Biblioteca.getLibros().size()==0)
         {
-            System.out.println("----------------- No hay ningún libro registrado. -----------------");
+            System.out.println("\n----------------- No hay ningún libro registrado. -----------------\n");
         }
     }
 
