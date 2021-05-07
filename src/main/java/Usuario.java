@@ -198,7 +198,7 @@ public class Usuario extends Persona {
             //añadimos el mismo usuario en la lista que hemos creado en esta clase (en esta lista solo hay usuarios)
             getListaUsuarios().add(new Usuario(nombre, apellido1, apellido2, edad, type, telefono, direccion, codigoPostal, correoElectronico));
 
-            System.out.println("\n-----------------¡Usuario registrado!--------------------\n");
+            System.out.println("\n-----------------¡USUARIO REGISTRADO!--------------------\n");
 
             //si el bibliotecario inicia sesión, entonces, podrá realizar operaciones en la biblioteca
             if (Bibliotecario.getLogin() == true) {
@@ -245,7 +245,7 @@ public class Usuario extends Persona {
 
                     if(contador==5)
                     {
-                        System.out.println("No te quedan intentos.");
+                        System.out.println("----------------- NO TE QUEDAN INTENTOS -----------------");
                         break;
                     }
 
@@ -254,7 +254,7 @@ public class Usuario extends Persona {
                 App.menuUsuario();
                 }
         }
-        System.out.println("ERROR. ¡USUARIO INCORRECTO!\n");
+        System.out.println("----------------- ERROR. ¡USUARIO INCORRECTO! -----------------\n");
         bibliotecario.logInOrRegister();
     }
 
@@ -277,7 +277,7 @@ public class Usuario extends Persona {
                 //CONTROL DEL CORREO ELECTRÓNICO ANTIGUO
                 while(!getListaUsuarios().get(i).getCorreoElectronico().equals(correoElectronicoAntiguo))
                 {
-                    System.out.println("Correo electronico incorrecto. Vuelve a introducir su correo electronico antiguo!");
+                    System.out.println("----------------- CORREO ELECTRONICO INCORRECTO. Vuelve a introducir su correo electronico antiguo! -----------------");
                     correoElectronicoAntiguo=utilities.makeQuestion("Introduce tu correo electrónico antiguo");
                 }
 
@@ -287,7 +287,7 @@ public class Usuario extends Persona {
                     //CONTROL CORREO ELECTRÓNICO
                     while(!correoElectronicoNuevo.contains("@")&&!correoElectronicoNuevo.contains("."))
                     {
-                        System.out.println("Este correo electrónico no existe. Vuelve a introducir tu correo electrónico!");
+                        System.out.println("----------------- Este correo electrónico no existe. Vuelve a introducir tu correo electrónico! -----------------");
                         correoElectronicoNuevo=utilities.makeQuestion("Introduce tu nuevo correo electrónico");
                     }
 
@@ -296,10 +296,10 @@ public class Usuario extends Persona {
                 }
                 else
                 {
-                    System.out.println("ERROR. Usuario incorrecto.\n");
+                    System.out.println("-------------- ERROR. USUARIO INCORRECTO. --------------\n");
                 }
             } else {
-                System.out.println("ERROR. Usuario incorrecto.\n");
+                System.out.println("-------------- ERROR. USUARIO INCORRECTO. --------------\n");
             }
         }
     }

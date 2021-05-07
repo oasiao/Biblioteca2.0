@@ -201,7 +201,7 @@ public class Libro {
                     int numCopiasDisponibles = parseInt(utilities.makeQuestion("Cuántas copias quieres añadir?"));
                     Biblioteca.getLibros().get(i).setNumCopiasDisponibles(Biblioteca.getLibros().get(i).getNumCopiasDisponibles() + numCopiasDisponibles);
                     Biblioteca.getLibros().get(i).setNumCopias(Biblioteca.getLibros().get(i).getNumCopias() + numCopiasDisponibles);
-                    System.out.println("\n -------------------------Copias añadidas-------------------------\n");
+                    System.out.println("\n ------------------------- Copias añadidas -------------------------\n");
                 } else {
                     break;
                 }
@@ -230,7 +230,7 @@ public class Libro {
             setNumLibros(getNumLibros() + 1); //sumamos uno a la cantidad de libros que hay
 
             //MENSAJE DE CONFIRMACIÓN
-            System.out.println("¡El libro se ha introducido con éxito!");
+            System.out.println("----------------- ¡El libro se ha introducido con éxito! -----------------");
         }
     }
 
@@ -264,11 +264,11 @@ public class Libro {
                     System.out.println("No podemos eliminar el libro porque un usuario lo tiene reservado.");
                 } else {
                     biblioteca.getLibros().remove(j);
-                    System.out.println("-----------------Libro eliminado!-----------------");
+                    System.out.println("----------------- LIBRO ELIMINADO! -----------------");
                 }
             } else {
                 if (j == Biblioteca.getLibros().size() - 1 && !isbn.equals(biblioteca.getLibros().get(j).getIsbn()))
-                    System.out.println("El libro no está registrado en la biblioteca.");
+                    System.out.println("----------------- El libro no está registrado en la biblioteca. -----------------");
             }
         }
     }
@@ -298,20 +298,20 @@ public class Libro {
                     System.out.println("TU BUSQUEDA: \n" + biblioteca.getLibros().get(i) + "\ny se encuentra en la posición: " + i + " de la biblioteca");
                     break;
                 } else {
-                    System.out.println("Probablemente se haya equivocado escribiendo el ISBN. \n Vuelva a intentarlo.");
+                    System.out.println(" ----------------- Probablemente se haya equivocado escribiendo el ISBN. \n Vuelva a intentarlo. -----------------");
                     break;
                 }
             }
 
             if (!isbn.equals(Biblioteca.getLibros().get(i).getIsbn()) && i == Biblioteca.getLibros().size()-1) //si el libro es diferente al isbn y ya hemos llegado al último libro...
             {
-                System.out.println("El libro que buscas no está registrado en nuestra biblioteca.");
+                System.out.println("----------------- LIBRO NO REGISTRADO -----------------");
             }
         }
 
         if(Biblioteca.getLibros().size()==0)
         {
-            System.out.println("No hay ningún libro registrado.");
+            System.out.println("----------------- LIBRO NO REGISTRADO -----------------");
         }
     }
 
@@ -337,14 +337,14 @@ public class Libro {
             } else {
                 if (!title.equals(biblioteca.getLibros().get(i).getTitulo()) && i == Biblioteca.getLibros().size() - 1) //si el libro es diferente al titulo y ya hemos llegado al último libro...
                 {
-                    System.out.println("No hay ningún libro registrado con este título: " + title);
+                    System.out.println("----------------- No hay ningún libro registrado con este título: " + title + "-----------------");
                 }
             }
         }
 
         if(Biblioteca.getLibros().size()==0)
         {
-            System.out.println("No hay ningún libro registrado.");
+            System.out.println("----------------- No hay ningún libro registrado. -----------------");
         }
     }
 

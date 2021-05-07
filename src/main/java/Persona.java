@@ -158,9 +158,8 @@ public abstract class Persona {
             while (!persona.equals("B") || !persona.equals("U")); //Si es diferente de bibliotecario (B) o usuario (U), volverá a preguntar: ¿usuario o bibliotecario?
 
         } else { //si no se cumple el control, entonces mostrará que ha habido un error
-            System.out.println("¡ERROR! Vuelve a intentarlo");
+            System.out.println("----------------- ¡ERROR! Vuelve a intentarlo -----------------");
             solicitarDatosPersona();
-            //TODO MENU: en el menú, preguntar si quiere salir o volver a introducir los datos.
         }
     }
 }

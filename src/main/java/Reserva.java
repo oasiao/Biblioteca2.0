@@ -136,7 +136,7 @@ public class Reserva extends Libro {
                             break;
                         } else {
                             //NO HAY LIBROS DISPONIBLES
-                            System.out.println("No tenemos ningún libro disponible.");
+                            System.out.println("----------------- No tenemos ningún libro disponible. -----------------");
                             break;
                         }
                     }
@@ -144,14 +144,14 @@ public class Reserva extends Libro {
                     //EL LIBRO NO ESTA REGISTRADO EN NUESTRA BIBLIOTECA
                     //Si hemos llegado al último libro y el isbn != todos, entonces mostraremos el siguiente mensaje
                     if (j == Biblioteca.getLibros().size() - 1 && !Biblioteca.getLibros().get(j).getIsbn().equals(isbn)) {
-                        System.out.println("El libro no se encuentra registrado en nuestra biblioteca.");
+                        System.out.println("----------------- LIBRO NO REGISTRADO -----------------");
                     }
                 }
             }
 
             //CORREO ELECTRONICO Y TELEFONO NO REGISTRADOS
             else {
-                System.out.println("El usuario introducido no existe.");
+                System.out.println("----------------- El usuario introducido no existe. -----------------");
             }
         }
     }
@@ -194,7 +194,7 @@ public class Reserva extends Libro {
                         //EL LIBRO NO ESTA REGISTRADO EN NUESTRA BIBLIOTECA
                         //Si hemos llegado al último libro y el isbn != todos, entonces mostraremos el siguiente mensaje
                         if (j == Biblioteca.getLibros().size() - 1 && !Biblioteca.getLibros().get(j).getIsbn().equals(isbn)) {
-                            System.out.println("El libro no se encuentra registrado en nuestra biblioteca.");
+                            System.out.println("-----------------El libro no se encuentra registrado en nuestra biblioteca.-----------------");
                         }
                         break;
                     }
@@ -202,7 +202,7 @@ public class Reserva extends Libro {
             }
             //CORREO ELECTRÓNICO Y TELÉFONO NO REGISTRADOS
             else {
-                System.out.println("El usuario introducido no existe.");
+                System.out.println("----------------- El usuario introducido no existe. -----------------");
             }
         }
     }

@@ -194,7 +194,7 @@ public class Bibliotecario extends Persona {
         String NIF = utilities.makeQuestion("Introduce tu NIF").toUpperCase();
         //CONTROL NIF
         while (NIF.length() != 9) {
-            System.out.println("El NIF introducido es incorrecto. Inténtelo de nuevo!");
+            System.out.println("---------------- El NIF introducido es incorrecto. Inténtelo de nuevo! ----------------");
             NIF = utilities.makeQuestion("Introduce tu NIF").toUpperCase();
         }
 
@@ -227,7 +227,7 @@ public class Bibliotecario extends Persona {
 
             //SI NO CUMPLE CON EL CONTROL DE DATOS, ENTONCES, MOSTRARA EL MENSAJE ¡ERROR!
         }else{
-            System.out.println("ERROR. Vuelve a introducir los datos");
+            System.out.println("----------------- ERROR! VUELVE A INTRODUCIR LOS DATOS -----------------");
             solicitarDatosBibliotecario(nombre, apellido1, apellido2, edad, type);
         }
     }
@@ -274,7 +274,7 @@ public class Bibliotecario extends Persona {
                         usuario.logInUsuario();
                         break;
                     default:
-                        System.out.println("ERROR");
+                        System.out.println("----------------- ¡ERROR! -----------------");
                         break;
                 }
                 break;
@@ -285,7 +285,7 @@ public class Bibliotecario extends Persona {
                 break;
 
             default:
-                System.out.println("ERROR");
+                System.out.println("----------------- ¡ERROR! -----------------");
                 logInOrRegister(); //VOLVEMOS AL MENU
                 break;
         }
@@ -307,13 +307,13 @@ public class Bibliotecario extends Persona {
                 while(!getListaBibliotecarios().get(i).getPassword().equals(password) && contador!=5)
                 {
                     contador++;
-                    System.out.println("Has introducido mal la password. Vuelve a intentarlo");
+                    System.out.println("----------------- PASSWORD INCORRECTA -----------------");
                     password = utilities.makeQuestion("Introduce tu password");
                 }
 
                 if(contador==5)
                 {
-                    System.out.println("---------------No te quedan intentos.---------------");
+                    System.out.println("--------------- NO TE QUEDAN MAS INTENTOS ---------------");
                     break;
                 }
 
@@ -322,7 +322,7 @@ public class Bibliotecario extends Persona {
                 App.menuBibliotecario();
             }
         }
-        System.out.println("¡ERROR!");
+        System.out.println("----------------- ¡ERROR! -----------------");
         logInOrRegister();
     }
 
@@ -356,10 +356,10 @@ public class Bibliotecario extends Persona {
                     Biblioteca.getPersonas().remove(i);
                     getListaBibliotecarios().remove(j);
 
-                    System.out.println("-------------------ELIMINADO CON ÉXITO------------------");
+                    System.out.println("------------------- ELIMINADO CON EXITO ------------------");
                     break;
                 } else {
-                    System.out.println("El elemento no existe");
+                    System.out.println("----------------- NO EXISTE -----------------");
                 }
             }
         }
@@ -384,7 +384,7 @@ public class Bibliotecario extends Persona {
         for (int i = 0; i < getListaBibliotecarios().size(); i++) {
             if(NIF.equals("00000000A"))
             {
-                System.out.println("\n--------------No puedes cambiar la contraseña del administrador.--------------\n");
+                System.out.println("\n-------------- NO PUEDES CAMBIAR EL PASSWORD DEL ADMINISTRADOR --------------\n");
                 break;
             }
             if (getListaBibliotecarios().get(i).getNIF().equals(NIF)) {
@@ -419,12 +419,12 @@ public class Bibliotecario extends Persona {
                 }
                 else
                 {
-                    System.out.println("ERROR. Usuario incorrecto.\n");
+                    System.out.println("----------------- ERROR. USUARIO INCORRECTO -----------------.\n");
                 }
             }
             else
             {
-                System.out.println("ERROR. Usuario incorrecto.\n");
+                System.out.println("----------------- ERROR. USUARIO INCORRECTO. -----------------\n");
             }
 
 
